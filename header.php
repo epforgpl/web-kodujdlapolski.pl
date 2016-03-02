@@ -19,7 +19,7 @@ $src = get_template_directory_uri();
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $src ?>/css/normalize.css" />
 		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $src ?>/css/foundation.min.css" />
-		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $src ?>/style.css?v=1.01" />
+		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $src ?>/style.css?v=1.03" />
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 		<link rel="icon" href="<?php echo $src ?>/images/favicon.png" type="image/png"/>
 		<?php

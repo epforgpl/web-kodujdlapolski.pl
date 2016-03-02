@@ -338,7 +338,7 @@ if (!empty($_POST['email'])) {
 							if ($terms && !is_wp_error($terms)) :
 
 								foreach ($terms as $term) {
-									if ($term->parent == icl_object_id(84, 'filters')) {
+									if ($term->parent == icl_object_id(84, 'filters',true)) {
 										?>
 										<tr>
 											<td class="photo">
