@@ -2,6 +2,7 @@
 
 require_once('engine/main.php');
 require_once('Facebook/autoload.php');
+require_once('recaptcha/autoload.php');
 
 add_theme_support('post-thumbnails');
 
@@ -121,8 +122,8 @@ add_action('login_head', 'login_function');
 
 add_filter('avatar_defaults', 'newgravatar');
 function newgravatar($avatar_defaults) {
-	$myavatar = get_bloginfo('template_directory') . '/images/blank-person.png';
-	$avatar_defaults[$myavatar] = "KDP blank";
+	$myavatar = 'http://kodujdlapolski.pl/wp-content/themes/kdp/images/blank-person.png';
+	$avatar_defaults[$myavatar] = "KDP blank 2";
 	return $avatar_defaults;
 }
 

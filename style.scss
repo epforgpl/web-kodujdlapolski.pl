@@ -434,7 +434,7 @@ hr {
 			font-weight:700;
 		}
 		p:first-of-type {
-			font-size:24px;
+			font-weight:700;
 		}
 		* {
 			line-height:135%;
@@ -900,6 +900,9 @@ img.aligncenter { display: block; margin-left: auto; margin-right: auto; }
 		.txt {
 			line-height:135%;
 			font-size:14px;
+			p {
+				text-align:justify;
+			}
 		}
 		.btn {
 			position:absolute;
@@ -1337,4 +1340,13 @@ img.aligncenter { display: block; margin-left: auto; margin-right: auto; }
 iframe {
 	max-width:1024px;
 	overflow-x:hidden;
+}
+
+.fg2 {
+	height:0;
+	overflow:hidden;
+}
+
+.lead {
+	font-size:100%;
 }

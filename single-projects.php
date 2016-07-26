@@ -1,41 +1,53 @@
 <?php
-if (!empty($_POST['email'])) {
-	$file_tmp = $_FILES['file']['tmp_name'];
-	$file_name = $_FILES['file']['name'];
-	$file_size = $_FILES['file']['size'];
+if (isset($_POST['g-recaptcha-response'])):
 
-	if (is_uploaded_file($file_tmp)) {
-		move_uploaded_file($file_tmp, WP_CONTENT_DIR . "/uploads/$file_name");
-		$attachments = array(WP_CONTENT_DIR . '/uploads/' . $file_name);
-	}
+	require_once('recaptcha/autoload.php');
+	$recaptcha = new \ReCaptcha\ReCaptcha('6LdZuB8TAAAAADNqj-Iv6YuAdRqJBEzMhJz_ZUmB');
+	$resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+
+	if (($resp->isSuccess())) {
+		if (!empty($_POST['email']) && empty($_GET['firstname']) && empty($_GET['lastname'])) {
+			$file_tmp = $_FILES['file']['tmp_name'];
+			$file_name = $_FILES['file']['name'];
+			$file_size = $_FILES['file']['size'];
+
+			if (is_uploaded_file($file_tmp)) {
+				move_uploaded_file($file_tmp, WP_CONTENT_DIR . "/uploads/$file_name");
+				$attachments = array(WP_CONTENT_DIR . '/uploads/' . $file_name);
+			}
 
 
-	$pid = $_POST['pid'];
+			$pid = $_POST['pid'];
 
-	$headers = 'Content-type: text/html; charset=utf-8' . "\r\n";
-	$headers .= 'From: mailer@kodujdlapolski.pl' . "\r\n" .
-					'Reply-To: ' . $_POST['email'] . "\r\n";
-	if ($_POST['cc']=='1') {
-	$title = 'Kontakt z koordynatorem';
-		$content = 'Imię: ' . $_POST['fname'] . ' ' . $_POST['lname'] .
-					'<br>email: ' . $_POST['email'] .
-					'<br>projekt: ' . get_the_title($pid) .
-					'<br>wiadomość: ' . nl2br($_POST['message']);
+			$headers = 'Content-type: text/html; charset=utf-8' . "\r\n";
+			$headers .= 'From: mailer@kodujdlapolski.pl' . "\r\n" .
+							'Reply-To: ' . $_POST['email'] . "\r\n";
+			if ($_POST['cc'] == '1') {
+				$title = 'Kontakt z koordynatorem';
+				$content = 'Imię: ' . $_POST['fname'] . ' ' . $_POST['lname'] .
+								'<br>email: ' . $_POST['email'] .
+								'<br>projekt: ' . get_the_title($pid) .
+								'<br>wiadomość: ' . nl2br($_POST['message']);
+			} else {
+				$title = 'Zapytanie ze strony';
+				$content = 'Imię: ' . $_POST['fname'] . ' ' . $_POST['lname'] .
+								'<br>email: ' . $_POST['email'] .
+								'<br>praca: ' . $_POST['job'] .
+								'<br>projekt: ' . get_the_title($pid) .
+								'<br>wiadomość: ' . nl2br($_POST['message']);
+			}
+			wp_mail(get_field('mail', $pid), $title, $content, $headers, $attachments);
+			wp_mail($_POST['email'], $title, $content, $headers, $attachments);
+			wp_mail('piotr@kliks.eu', $title, $content, $headers, $attachments);
+			unlink($attachments[0]);
+
+			$success = 1;
+		}
 	}
 	else {
-	$title = 'Zapytanie ze strony';
-	$content = 'Imię: ' . $_POST['fname'] . ' ' . $_POST['lname'] .
-					'<br>email: ' . $_POST['email'] .
-					'<br>praca: ' . $_POST['job'] .
-					'<br>projekt: ' . get_the_title($pid) .
-					'<br>wiadomość: ' . nl2br($_POST['message']);
+		$success = 2;
 	}
-	wp_mail(get_field('mail', $pid), $title, $content, $headers, $attachments);
-	wp_mail($_POST['email'], $title, $content, $headers, $attachments);
-	unlink($attachments[0]);
-
-	$success = 1;
-}
+endif;
 ?>
 
 <?php get_header() ?>
@@ -60,25 +72,26 @@ if (!empty($_POST['email'])) {
 					<div class="small-12 medium-9 columns">
 						<div class="content">
 							<?php the_content(); ?>
-							<?php 
-								$topics = wp_get_post_terms(get_the_ID(),'filters');
-								$ret = '';
-								foreach ($topics as $topic):
-									if ($topic->parent != icl_object_id(84,'filters', true)) {
-										$ret[$topic->parent] = $topic->name.', ';
-									}
-								endforeach; ?>
+							<?php
+							$topics = wp_get_post_terms(get_the_ID(), 'filters');
+							$ret = '';
+							foreach ($topics as $topic):
+								if ($topic->parent != icl_object_id(84, 'filters', true)) {
+									$ret[$topic->parent] = $topic->name . ', ';
+								}
+							endforeach;
+							?>
 							<div class="mt20 mb20">
 								<?php foreach ($ret as $key => $r): ?>
 									<strong><?php
-										$t = get_term($key,'filters');
+										$t = get_term($key, 'filters');
 										echo $t->name;
-									?>:</strong> <?php echo rtrim($r,', '); ?><br />
+										?>:</strong> <?php echo rtrim($r, ', '); ?><br />
 								<?php endforeach; ?>
 							</div>
-							
+
 							<div class="text-center mt20 mb30"><a data-open="mailModal2" class="btn red bigger"><?php _e('Contact with coordinator'); ?></a></div>
-							
+
 							<ul class="project-links">
 								<?php
 								$links = get_field('links');
@@ -99,21 +112,24 @@ if (!empty($_POST['email'])) {
 													<div class="show-for-large">
 														<div id="discourse-comments"></div>
 														<script type="text/javascript">
-														var discourseUrl = "https://forum.kodujdlapolski.pl/";
-														function showDiscourseTopic(topic) {
-															var comments = document.getElementById('discourse-comments');
-															var iframe = document.getElementById('discourse-embed-frame');
-															if (iframe) { iframe.remove(); }
-															iframe = document.createElement('iframe');
-															iframe.src = '<?php echo $link['url']; ?>';
-															iframe.id = 'discourse-embed-frame';
-															iframe.width = '100%';
-															iframe.height = '500px';
-															iframe.frameBorder = '0';
-															iframe.scrolling = 'yes';
-															comments.appendChild(iframe);
-														};
-														showDiscourseTopic('');
+															var discourseUrl = "https://forum.kodujdlapolski.pl/";
+															function showDiscourseTopic(topic) {
+																var comments = document.getElementById('discourse-comments');
+																var iframe = document.getElementById('discourse-embed-frame');
+																if (iframe) {
+																	iframe.remove();
+																}
+																iframe = document.createElement('iframe');
+																iframe.src = '<?php echo $link['url']; ?>';
+																iframe.id = 'discourse-embed-frame';
+																iframe.width = '100%';
+																iframe.height = '500px';
+																iframe.frameBorder = '0';
+																iframe.scrolling = 'yes';
+																comments.appendChild(iframe);
+															}
+															;
+															showDiscourseTopic('');
 														</script>
 														<a href="<?php echo $link['url']; ?>" class="fright" target="_blank">Otwórz forum w nowym oknie &GT; </a>
 													</div>
@@ -181,7 +197,7 @@ if (!empty($_POST['email'])) {
 														<div class="issues-wrapper mt20 mb20">
 															<div class="title-row"><a href="<?php echo $link['url']; ?>/issues/" target="_blank"><?php _e('Issues from GitHub'); ?></a></div>
 															<?php foreach ($obj as $o): ?>
-																<?php //print_r($o); ?>
+																<?php //print_r($o);  ?>
 																<div class="issue-row">
 																	<div class="title-col">
 																		<a href="<?php echo $o->url; ?>" target="_blank"><?php echo $o->title; ?></a>
@@ -338,11 +354,11 @@ if (!empty($_POST['email'])) {
 							if ($terms && !is_wp_error($terms)) :
 
 								foreach ($terms as $term) {
-									if ($term->parent == icl_object_id(84, 'filters',true)) {
+									if ($term->parent == icl_object_id(84, 'filters', true)) {
 										?>
 										<tr>
 											<td class="photo">
-												<a href="#" class="contact"><img src="<?php echo $src; ?>/images/blank-person.jpg" /></a>
+												<a data-open="mailModal" data-job="<?php echo $term->name; ?>" class="contact"><img src="<?php echo $src; ?>/images/blank-person.jpg" /></a>
 											</td>
 											<td class="desc">
 												<a class="contact open-contact" data-open="mailModal" data-job="<?php echo $term->name; ?>"><?php _e('Join as'); ?><br /><?php echo $term->name; ?></a>

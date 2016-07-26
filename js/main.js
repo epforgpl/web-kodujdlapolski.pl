@@ -52,7 +52,8 @@ $(function () {
 
 		var wrong = 0;
 
-		$('.required').each(function () {
+
+		$(this).parents('form').find('.required').each(function () {
 			if ($(this).val() === '') {
 				$(this).addClass('er');
 				wrong = 1;

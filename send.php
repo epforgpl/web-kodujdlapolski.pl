@@ -15,7 +15,7 @@ if (!empty($_GET['email']))
 					'<br>email: '.$_GET['email'].
 					'<br>przedmiot: '.$_GET['object'].
 					'<br>wiadomość: '.nl2br($_GET['message']);
-	mail('contact@agatabielen.com',$title,$content,$headers);
+	wp_mail('piotr@kliks.eu', $title, $content, $headers, $attachments);
 	
 	?>	
 	<?php _e('Your message has been sent'); ?>

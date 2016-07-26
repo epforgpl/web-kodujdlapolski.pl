@@ -12,12 +12,16 @@
 			$thumb = wp_get_attachment_image_src(get_post_thumbnail_id(get_the_ID()), 'large');
 			$url = $thumb['0'];
 			?>
+			<div class="small-12 medium-9 columns post-content pb20">
+				<h1><?php the_title(); ?></h1>
+				<div class="date"><?php echo get_the_date(); ?> | <?php the_category(', '); ?></div>
+			</div>
+			<div class="small-12 medium-3 columns">&nbsp;</div>
 			<div class="small-12 medium-9 columns post-content">
 				<?php if ($url): ?>
 					<img src="<?php echo $url; ?>" class="mb40" />
 				<?php endif; ?>
-				<div class="date"><?php echo get_the_date(); ?> | <?php the_category(', '); ?></div>
-				<h1><?php the_title(); ?></h1>
+
 				<div class="content"><?php the_content(); ?></div>
 			</div>
 			<div class="small-12 medium-3 columns post-author">

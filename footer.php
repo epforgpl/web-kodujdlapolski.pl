@@ -73,6 +73,14 @@ global $success;
 			<label for="file"><?php _e('Attach file'); ?></label>
 			<input type="file" id="file" name="file">
     </div>
+		<div class="form-group fg2">
+			<input name="firstname" type="text" value="" />
+			<input name="lastname" type="text" value="" />
+		</div>
+
+		<div class="form-group">
+			<div id="recaptcha1"></div>
+		</div>
     <input type="hidden" value="<?php echo get_the_ID(); ?>" id="pid" name="pid">
     <button type="submit" class="btn red send-form"><?php _e('Send'); ?></button>
 	</form>
@@ -104,6 +112,10 @@ global $success;
 			<label for="file"><?php _e('Attach file'); ?></label>
 			<input type="file" id="file" name="file">
     </div>
+
+		<div class="form-group">
+			<div id="recaptcha2"></div>
+		</div>
     <input type="hidden" value="<?php echo get_the_ID(); ?>" id="pid" name="pid">
     <input type="hidden" value="1" name="cc">
     <button type="submit" class="btn red send-form"><?php _e('Send'); ?></button>
@@ -113,15 +125,23 @@ global $success;
   </button>
 </div>
 
-	<div class="mobile-overlay text-center">
-		<?php wp_nav_menu(array('theme_location' => 'primary', 'menu_class' => 'text-center mobile-menu')); ?>
-		<?php wp_nav_menu(array('theme_location' => 'primary2', 'menu_class' => 'text-center mobile-menu2')); ?>
-	</div>
+<div class="mobile-overlay text-center">
+	<?php wp_nav_menu(array('theme_location' => 'primary', 'menu_class' => 'text-center mobile-menu')); ?>
+	<?php wp_nav_menu(array('theme_location' => 'primary2', 'menu_class' => 'text-center mobile-menu2')); ?>
+</div>
 
 <?php if ($success == 1): ?>
 
 	<div class="reveal tiny" id="successModal" data-reveal data-options="vOffset: 50;">
 		<?php _e('Message sent. Copy of it went to your mailbox.'); ?>
+		<button class="close-button" data-close aria-label="Close modal" type="button">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+<?php elseif ($success == 2): ?>
+
+	<div class="reveal tiny" id="successModal" data-reveal data-options="vOffset: 50;">
+		<?php _e('Message not sent.'); ?>
 		<button class="close-button" data-close aria-label="Close modal" type="button">
 			<span aria-hidden="true">&times;</span>
 		</button>
@@ -133,14 +153,14 @@ global $success;
 <script src="<?php echo $src ?>/js/isotope.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"></script>
 <script>
-	$(document).foundation();
-	var src = '<?php echo $src; ?>';
+								$(document).foundation();
+								var src = '<?php echo $src; ?>';
 </script>
-<script src="<?php echo $src ?>/js/main.js"></script>
+<script src="<?php echo $src ?>/js/main.js?v=1.01"></script>
 
 <?php if ($success == 1): ?>
 	<script>
-		$('#successModal').foundation('open');
+									$('#successModal').foundation('open');
 	</script>
 <?php endif; ?>
 <?php

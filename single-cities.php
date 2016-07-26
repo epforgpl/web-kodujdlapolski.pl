@@ -151,7 +151,7 @@ else:
 												$user_photo = get_avatar_url($member['ID'], array('size' => 105));
 											}
 											if (!$user_photo) {
-												$user_photo = $src . '/images/blank-person2.jpg';
+												$user_photo = $src . '/images/blank-person.png';
 											}
 											$phone = get_field('phone_contact', 'user_' . $member['ID']);
 											$mail = get_field('mail_contact', 'user_' . $member['ID']);
@@ -198,7 +198,7 @@ else:
 																$user_photo = get_avatar_url($member['person']['ID'], array('size' => 105));
 															}
 															if (!$user_photo) {
-																$user_photo = $src . '/images/blank-person2.jpg';
+																$user_photo = $src . '/images/blank-person.png';
 															}
 															?>
 															<a href="<?php echo get_author_posts_url($member['person']['ID']); ?>"><img src="<?php echo $user_photo; ?>" /></a>

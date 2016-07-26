@@ -19,7 +19,7 @@ $src = get_template_directory_uri();
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $src ?>/css/normalize.css" />
 		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $src ?>/css/foundation.min.css" />
-		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $src ?>/style.css?v=1.03" />
+		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $src ?>/style.css?v=1.06" />
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 		<link rel="icon" href="<?php echo $src ?>/images/favicon.png" type="image/png"/>
 		<?php
@@ -32,20 +32,36 @@ $src = get_template_directory_uri();
 
 
 		<meta name="viewport" content="width=device-width" />
+		<script src='https://www.google.com/recaptcha/api.js?onload=kdpCallback&render=explicit'></script>
+		<script>
+			var recaptcha1;
+			var recaptcha2;
+			var kdpCallback = function () {
+				recaptcha1 = grecaptcha.render('recaptcha1', {
+					'sitekey': '6LdZuB8TAAAAAJ6u9zNLKCcf0iweJ5KEtjj6YCUd',
+					'theme': 'light'
+				});
+				recaptcha2 = grecaptcha.render('recaptcha2', {
+					'sitekey': '6LdZuB8TAAAAAJ6u9zNLKCcf0iweJ5KEtjj6YCUd',
+					'theme': 'light'
+				});
+			};
+		</script>
 	</head>
 
 
 	<body <?php body_class(); ?> >
+<script type="text/javascript" src="https://blackout.mojepanstwo.pl/blackout.js"></script>
 		<div id="fb-root"></div>
 		<script>(function (d, s, id) {
-				var js, fjs = d.getElementsByTagName(s)[0];
-				if (d.getElementById(id))
-					return;
-				js = d.createElement(s);
-				js.id = id;
-				js.src = "//connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.5&appId=155938441448129";
-				fjs.parentNode.insertBefore(js, fjs);
-			}(document, 'script', 'facebook-jssdk'));</script>
+								var js, fjs = d.getElementsByTagName(s)[0];
+								if (d.getElementById(id))
+									return;
+								js = d.createElement(s);
+								js.id = id;
+								js.src = "//connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.5&appId=155938441448129";
+								fjs.parentNode.insertBefore(js, fjs);
+							}(document, 'script', 'facebook-jssdk'));</script>
 		<header>
 			<div class="ep-top">
 				<div class="row">

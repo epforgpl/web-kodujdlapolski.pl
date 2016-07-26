@@ -13,7 +13,7 @@
 			$user_photo = get_avatar_url($author_id, array('size' => 105));
 		}
 		if (!$user_photo) {
-			$user_photo = $src . '/images/blank-person2.jpg';
+			$user_photo = $src . '/images/blank-person.png';
 		}
 		?>
 		<img src="<?php echo $user_photo; ?>" />
