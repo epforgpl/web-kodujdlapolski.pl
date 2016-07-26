@@ -66,7 +66,7 @@ $src = get_template_directory_uri();
 			<div class="ep-top">
 				<div class="row">
 					<div class="small-10 large-6 columns">
-						<a href="http://fundament.ngo/" class="fundament"><img src="<?php echo $src; ?>/images/spolecznosc.svg" /></a>
+                <a target="_blank" href="http://epf.org.pl/">Program Fundacji ePaństwo<img src="<?php echo $src; ?>/images/eplogo.png"/></a>
 					</div>
 					<div class="small-2 large-6 columns text-right">
 						<a href="https://www.facebook.com/KodujDlaPolski/" target="_blank"><img src="<?php echo $src; ?>/images/fb-icon.png" /></a>
