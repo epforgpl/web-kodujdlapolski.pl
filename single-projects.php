@@ -179,8 +179,7 @@ endif;
 													</div>
 													<?php
 													if (false === ($git_issues = get_transient('tmp_github_issues_' . $ar[3] . '_' . $ar[4]))):
-														//$ch = curl_init('https://api.github.com/repos/' . $ar[3] . '/' . $ar[4] . '/issues');
-														$ch = curl_init('https://api.github.com/repos/epforgpl/web-kodujdlapolski.pl/issues');
+														$ch = curl_init('https://api.github.com/repos/' . $ar[3] . '/' . $ar[4] . '/issues');
 														curl_setopt($ch, CURLOPT_HEADER, 0);
 														curl_setopt($ch, CURLOPT_USERAGENT, 'KdP');
 														curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
