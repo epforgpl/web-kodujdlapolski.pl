@@ -102,6 +102,15 @@ else:
 						<?php endif; ?>
 					</div>
 
+					<?php $content = apply_filters( 'the_content', get_the_content() ); ?>
+
+					<?php if(!empty(trim($content))): ?>
+
+					<h3 class="section-title"><?php _e('About us'); ?></h3>
+					<p class="meetings-description"> 
+					<?php the_content(); ?>
+					</p>
+					<?php endif; ?>
 
 					<?php
 					$members = get_field('coordinators');
