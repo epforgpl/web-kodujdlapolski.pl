@@ -113,6 +113,95 @@
 				</div>
 			</div>
 		</div>
+		<div class="row mt60">
+			<div class="small-12 columns">
+				<h3 class="subtitle"><span><?php _e('Projects'); ?></span></h3>
+			</div>
+		</div>
+
+		<div class="row small-up-2 large-up-6 pr-list project-list mt40">
+			<?php
+			$projects = get_field('projects');
+			$i = 0;
+			if ($projects):
+				foreach ($projects as $post):
+					setup_postdata($post);
+					?>
+					<?php get_template_part('project-on-list-main'); ?>
+					<?php
+					$i++;
+					$notin[] = get_the_ID();
+				endforeach;
+				?>
+			<?php endif; ?>
+			<?php
+			$to_rand = 5 - $i;
+			if ($to_rand > 0):
+				$args = array(
+						'post_type' => 'projects',
+						'posts_per_page' => $to_rand,
+						'post__not_in' => $notin,
+						'tax_query' => array(
+								array(
+										'taxonomy' => 'filters',
+										'field' => 'id',
+										'terms' => icl_object_id(42, 'filters'),
+								),
+						),
+				);
+
+				$query = new WP_Query($args);
+				?>
+				<?php if ($query->have_posts()): ?>
+					<?php while ($query->have_posts()): $query->the_post(); ?>
+						<?php get_template_part('project-on-list-main'); ?>
+					<?php endwhile; ?>
+				<?php endif; ?>
+			<?php endif; ?>
+			<div class="column project-box">
+				<a href="http://forum.kodujdlapolski.pl/t/jak-dodawac-nowe-pomysly/899" class="add-project">
+					<img src="<?php echo $src; ?>/images/add-project-icon.png" class="icon" />
+					<span><?php _e('Share a challenge to solve!'); ?></span>
+				</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-12 columns text-center">
+				<a href="<?php echo get_permalink(icl_object_id(11, 'page')); ?>" class="btn red"><?php _e('Show all projects'); ?></a>
+			</div>
+		</div>
+
+
+		<div class="row mt50">
+			<div class="small-12 columns">
+				<h3 class="subtitle"><span><?php _e('Blog'); ?></span></h3>
+			</div>
+		</div>
+
+		<div class="row post-list mt40">
+			<?php
+			$args = array(
+					'post_type' => 'post',
+					'posts_per_page' => 3,
+			);
+
+			$query = new WP_Query($args);
+			?>
+			<?php if ($query->have_posts()): ?>
+				<?php while ($query->have_posts()): $query->the_post(); ?>
+					<?php get_template_part('post-on-list'); ?>
+				<?php endwhile; ?>
+			<?php endif; ?>
+			<div class="small-12 columns text-center">
+				<a href="<?php echo get_permalink(icl_object_id(17, 'page')); ?>" class="btn red"><?php _e('Read all posts'); ?></a>
+			</div>
+		</div>
+
+		<div class="row mt50">
+			<div class="small-12 columns">
+				<h3 class="subtitle"><span><?php _e('Koduj dla Polski'); ?></span></h3>
+			</div>
+		</div>
 
 		<div class="row mt40 stats-list text-center large-text-left show-for-large">
 			<div class="small-12 medium-6 large-3 columns overflow pt15">
@@ -229,89 +318,9 @@
 			<?php endforeach; ?>
 		</div>
 
-		<div class="row mt60">
-			<div class="small-12 columns">
-				<h3 class="subtitle"><span><?php _e('Projects'); ?></span></h3>
-			</div>
-		</div>
-
-		<div class="row small-up-2 large-up-6 pr-list project-list mt40">
-			<?php
-			$projects = get_field('projects');
-			$i = 0;
-			if ($projects):
-				foreach ($projects as $post):
-					setup_postdata($post);
-					?>
-					<?php get_template_part('project-on-list-main'); ?>
-					<?php
-					$i++;
-					$notin[] = get_the_ID();
-				endforeach;
-				?>
-			<?php endif; ?>
-			<?php
-			$to_rand = 5 - $i;
-			if ($to_rand > 0):
-				$args = array(
-						'post_type' => 'projects',
-						'posts_per_page' => $to_rand,
-						'post__not_in' => $notin,
-						'tax_query' => array(
-								array(
-										'taxonomy' => 'filters',
-										'field' => 'id',
-										'terms' => icl_object_id(42, 'filters'),
-								),
-						),
-				);
-
-				$query = new WP_Query($args);
-				?>
-				<?php if ($query->have_posts()): ?>
-					<?php while ($query->have_posts()): $query->the_post(); ?>
-						<?php get_template_part('project-on-list-main'); ?>
-					<?php endwhile; ?>
-				<?php endif; ?>
-			<?php endif; ?>
-			<div class="column project-box">
-				<a href="http://forum.kodujdlapolski.pl/t/jak-dodawac-nowe-pomysly/899" class="add-project">
-					<img src="<?php echo $src; ?>/images/add-project-icon.png" class="icon" />
-					<span><?php _e('Share a challenge to solve!'); ?></span>
-				</a>
-			</div>
-		</div>
-		<div class="row">
-			<div class="small-12 columns text-center">
-				<a href="<?php echo get_permalink(icl_object_id(11, 'page')); ?>" class="btn red"><?php _e('Show all projects'); ?></a>
-			</div>
-		</div>
 
 
-		<div class="row mt50">
-			<div class="small-12 columns">
-				<h3 class="subtitle"><span><?php _e('Blog'); ?></span></h3>
-			</div>
-		</div>
 
-		<div class="row post-list mt40">
-			<?php
-			$args = array(
-					'post_type' => 'post',
-					'posts_per_page' => 3,
-			);
-
-			$query = new WP_Query($args);
-			?>
-			<?php if ($query->have_posts()): ?>
-				<?php while ($query->have_posts()): $query->the_post(); ?>
-					<?php get_template_part('post-on-list'); ?>
-				<?php endwhile; ?>
-			<?php endif; ?>
-			<div class="small-12 columns text-center">
-				<a href="<?php echo get_permalink(icl_object_id(17, 'page')); ?>" class="btn red"><?php _e('Read all posts'); ?></a>
-			</div>
-		</div>
 	<?php endwhile; ?>
 <?php endif; ?>
 
