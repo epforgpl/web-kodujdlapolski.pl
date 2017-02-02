@@ -67,50 +67,50 @@
 					</div>
 				</div>
 				<div class="meetings hide-for-large">
-						<?php
-						if (false === ($events = get_transient('facebook-meetings'))):
-							$fb = new Facebook\Facebook([
-									'app_id' => '155938441448129',
-									'app_secret' => '3da9ce4c1422685a66ccc5099f477037',
-									'default_graph_version' => 'v2.5',
-							]);
-							try {
-								$response = $fb->get('/KodujDlaPolski/events', '155938441448129|sH7mAZZROgilR_b0XiJjPO0iAUs');
-							} catch (Facebook\Exceptions\FacebookResponseException $e) {
-								echo 'Graph returned an error: ' . $e->getMessage();
-								exit;
-							} catch (Facebook\Exceptions\FacebookSDKException $e) {
-								echo 'Facebook SDK returned an error: ' . $e->getMessage();
-								exit;
+					<?php
+					if (false === ($events = get_transient('facebook-meetings'))):
+						$fb = new Facebook\Facebook([
+								'app_id' => '155938441448129',
+								'app_secret' => '3da9ce4c1422685a66ccc5099f477037',
+								'default_graph_version' => 'v2.5',
+						]);
+						try {
+							$response = $fb->get('/KodujDlaPolski/events', '155938441448129|sH7mAZZROgilR_b0XiJjPO0iAUs');
+						} catch (Facebook\Exceptions\FacebookResponseException $e) {
+							echo 'Graph returned an error: ' . $e->getMessage();
+							exit;
+						} catch (Facebook\Exceptions\FacebookSDKException $e) {
+							echo 'Facebook SDK returned an error: ' . $e->getMessage();
+							exit;
+						}
+						$events = $response->getDecodedBody();
+						set_transient('facebook-meetings', $events, 12 * 3600);
+					endif;
+					$meetings = '';
+					$i = 0;
+					$evs = array_reverse($events['data']);
+					foreach ($evs as $ev):
+						if (strtotime($ev['start_time']) + 3600 > time()) {
+							$meetings .= '<div class="overflow mb15"><div class="cal-icon"><img src="' . $src . '/images/calendar-icon.png" /></div><a href="https://www.facebook.com/events/' . $ev['id'] . '" class="event-link">';
+							$meetings .= '<span class="date">' . date_i18n('d F', strtotime($ev['start_time']) + 3600) . '</span>'
+											. '<span class="city">' . get_city_name($ev['place']['location']['city']) . '</span></a></div>';
+							$i++;
+							if ($i == 3) {
+								break;
 							}
-							$events = $response->getDecodedBody();
-							set_transient('facebook-meetings', $events, 12 * 3600);
-						endif;
-						$meetings = '';
-						$i = 0;
-						$evs = array_reverse($events['data']);
-						foreach ($evs as $ev):
-							if (strtotime($ev['start_time']) + 3600 > time()) {
-								$meetings .= '<div class="overflow mb15"><div class="cal-icon"><img src="' . $src . '/images/calendar-icon.png" /></div><a href="https://www.facebook.com/events/' . $ev['id'] . '" class="event-link">';
-								$meetings .= '<span class="date">' . date_i18n('d F', strtotime($ev['start_time']) + 3600) . '</span>'
-												. '<span class="city">' . get_city_name($ev['place']['location']['city']) . '</span></a></div>';
-								$i++;
-								if ($i == 3) {
-									break;
-								}
-							}
-						endforeach;
-						?>
-						<div class="title mb20"><?php _e('Upcoming events'); ?></div>
-						<?php if ($meetings): ?>
-							<?php echo $meetings; ?>
-							<div class="text-center">
-								<a href="https://www.facebook.com/KodujDlaPolski/events" class="btn border-white" target="_blank"><?php _e('Show all events'); ?></a>
-							</div>
-						<?php else: ?>
-							<div class="msg"><?php _e('No meetings in our schedule'); ?></div>
-						<?php endif; ?>
-					</div>
+						}
+					endforeach;
+					?>
+					<div class="title mb20"><?php _e('Upcoming events'); ?></div>
+					<?php if ($meetings): ?>
+						<?php echo $meetings; ?>
+						<div class="text-center">
+							<a href="https://www.facebook.com/KodujDlaPolski/events" class="btn border-white" target="_blank"><?php _e('Show all events'); ?></a>
+						</div>
+					<?php else: ?>
+						<div class="msg"><?php _e('No meetings in our schedule'); ?></div>
+					<?php endif; ?>
+				</div>
 			</div>
 		</div>
 
@@ -277,7 +277,7 @@
 			<div class="column project-box">
 				<a href="http://forum.kodujdlapolski.pl/t/jak-dodawac-nowe-pomysly/899" class="add-project">
 					<img src="<?php echo $src; ?>/images/add-project-icon.png" class="icon" />
-					<span><?php _e('Got an idea for an app?'); ?><br /><?php _e('Tell us!'); ?></span>
+					<span><?php _e('Share a challenge to solve!'); ?></span>
 				</a>
 			</div>
 		</div>

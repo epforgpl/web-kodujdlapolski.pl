@@ -20,8 +20,13 @@
 	</div>
 	<div class="small-10 columns">
 		<h1 class="page-title author-title"><?php the_author(); ?></h1>
-		<h2 class="author-function mb20"><?php the_field('function', 'user_' . $author_id); ?></h2>
-		<div class="author-description"><?php the_author_meta('description'); ?></div>
+		<?php if (ICL_LANGUAGE_CODE == 'pl'): ?>
+			<h2 class="author-function mb20"><?php the_field('function', 'user_' . $author_id); ?></h2>
+			<div class="author-description"><?php the_author_meta('description'); ?></div>
+		<?php else: ?>
+			<h2 class="author-function mb20"><?php the_field('function_en', 'user_' . $author_id); ?></h2>
+			<div class="author-description"><?php the_field('description_en', 'user_' . $author_id); ?></div>
+		<?php endif; ?>
 	</div>
 	<div class="small-12 columns"><hr /></div>
 </div>

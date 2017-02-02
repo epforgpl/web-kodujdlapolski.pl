@@ -33,16 +33,25 @@
 								setup_postdata($post);
 								$logo = get_field('logo');
 								$url = get_field('url');
+								$content = get_the_content();
 								?>
 								<div class="partner-box">
 									<?php if ($url): ?>
-										<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" /></a>
-										<h3><a href="<?php echo $url; ?>"><?php the_title(); ?></a></h3>
+										<div class="text-center">
+											<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" /></a>
+										</div>
+										<?php if (empty($content)): ?>
+											<h3><a href="<?php echo $url; ?>"><?php the_title(); ?></a></h3>
+										<?php endif; ?>
 									<?php else: ?>
-										<img src="<?php echo $logo['sizes']['medium']; ?>" />
-										<h3><?php the_title(); ?></h3>
+										<div class="text-center">
+											<img src="<?php echo $logo['sizes']['medium']; ?>" />
+										</div>
+										<?php if (empty($content)): ?>
+											<h3><?php the_title(); ?></h3>
+										<?php endif; ?>
 									<?php endif; ?>
-									<div class="content">
+									<div class="content pt15">
 										<?php the_content(); ?>
 									</div>
 								</div>

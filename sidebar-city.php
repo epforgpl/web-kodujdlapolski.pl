@@ -63,5 +63,5 @@ $facebook = get_field('facebook_url');
 
 <a href="http://forum.kodujdlapolski.pl/t/jak-dodawac-nowe-pomysly/899" class="add-project">
 	<img src="<?php echo $src; ?>/images/add-project-icon.png" class="icon" />
-	<span><?php _e('Got an idea for an app?'); ?><br /><?php _e('Tell us!'); ?></span>
+	<span><?php _e('Share a challenge to solve!'); ?></span>
 </a>

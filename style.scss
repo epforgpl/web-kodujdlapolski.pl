@@ -167,8 +167,13 @@ header {
 	.ep-top {
 		max-height:60px;
 		overflow:hidden;
+		
+		@media all and (max-width:642px) {
+			max-height:120px;
+		}
+		
 		a {
-			display:block;
+			display:inline-block;
 			line-height:40px;
 			color:#428bca;
 			font-size:14px;
@@ -177,6 +182,18 @@ header {
 		hr {
 			border-bottom:2px solid #ededed;
 			margin-top:4px;
+		}
+	}
+	
+	.social-links {
+		a {
+			margin-left:8px;
+			font-size:28px;
+			color:#000;
+			i {
+				position:relative;
+				top:4px;
+			}
 		}
 	}
 
@@ -456,6 +473,15 @@ hr {
 	}
 }
 
+.partner-box {
+	.content {
+		margin-top:15px;
+		p:first-of-type {
+			font-weight:400;
+		}
+	}
+}
+
 .project-single .content {
 	p:first-of-type {
 		font-size:16px;
@@ -529,7 +555,7 @@ hr {
 	list-style-type:none;
 	margin-left:0 !important;
 	li {
-		padding:10px 0;
+		padding:5px 0;
 	}
 	a {
 		font-weight:700;
@@ -659,6 +685,7 @@ hr {
 		display:block;
 		position:absolute;
 		left:20px;
+		right:20px;
 		bottom:20px;
 		font-size:24px;
 		font-weight:700;
@@ -1349,4 +1376,31 @@ iframe {
 
 .lead {
 	font-size:100%;
+}
+
+.embed-wrapper {
+	border:1px dotted $red;
+	padding:50px 10px 15px 10px;
+	margin-top:25px;
+	position:relative;
+	left:-10px;
+	
+	.embed-link {
+		position:absolute;
+		left:9px;
+		top:-18px;
+	}
+}
+
+.error-404-wrapper {
+	padding:100px 0;
+	
+	.title-404 {
+		font-size:120px;
+	}
+	
+	.subtitle-404 {
+		font-size:28px;
+		margin-bottom:40px;
+	}
 }

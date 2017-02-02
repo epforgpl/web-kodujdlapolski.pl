@@ -1,5 +1,4 @@
 <?php
-
 require_once('engine/main.php');
 require_once('Facebook/autoload.php');
 require_once('recaptcha/autoload.php');
@@ -62,7 +61,6 @@ function add_roles_kdp() {
 
 	$role = get_role('project-leader');
 	$role->add_cap('level_1');
-	
 }
 
 add_action('admin_init', 'add_roles_kdp');
@@ -116,109 +114,112 @@ function login_function() {
 		}
 		return $translated_text;
 	}
+
 }
+
 add_action('login_head', 'login_function');
 
 
 add_filter('avatar_defaults', 'newgravatar');
+
 function newgravatar($avatar_defaults) {
 	$myavatar = 'http://kodujdlapolski.pl/wp-content/themes/kdp/images/blank-person.png';
 	$avatar_defaults[$myavatar] = "KDP blank 2";
 	return $avatar_defaults;
 }
 
-add_filter( 'map_meta_cap', 'my_map_meta_cap', 10, 4 );
+add_filter('map_meta_cap', 'my_map_meta_cap', 10, 4);
 
-function my_map_meta_cap( $caps, $cap, $user_id, $args ) {
+function my_map_meta_cap($caps, $cap, $user_id, $args) {
 
-	if ( 'edit_project' == $cap || 'delete_project' == $cap || 'read_project' == $cap ) {
-		$post = get_post( $args[0] );
-		$post_type = get_post_type_object( $post->post_type );
+	if ('edit_project' == $cap || 'delete_project' == $cap || 'read_project' == $cap) {
+		$post = get_post($args[0]);
+		$post_type = get_post_type_object($post->post_type);
 
 		$caps = array();
 	}
 
-	if ( 'edit_project' == $cap ) {
-		if ( $user_id == $post->post_author )
+	if ('edit_project' == $cap) {
+		if ($user_id == $post->post_author)
 			$caps[] = $post_type->cap->edit_posts;
 		else
 			$caps[] = $post_type->cap->edit_others_posts;
 	}
 
-	elseif ( 'delete_project' == $cap ) {
-		if ( $user_id == $post->post_author )
+	elseif ('delete_project' == $cap) {
+		if ($user_id == $post->post_author)
 			$caps[] = $post_type->cap->delete_posts;
 		else
 			$caps[] = $post_type->cap->delete_others_posts;
 	}
 
-	elseif ( 'read_project' == $cap ) {
+	elseif ('read_project' == $cap) {
 
-		if ( 'private' != $post->post_status )
+		if ('private' != $post->post_status)
 			$caps[] = 'read';
-		elseif ( $user_id == $post->post_author )
+		elseif ($user_id == $post->post_author)
 			$caps[] = 'read';
 		else
 			$caps[] = $post_type->cap->read_private_posts;
 	}
-	
-	if ( 'edit_post2' == $cap || 'delete_post2' == $cap || 'read_post2' == $cap ) {
-		$post = get_post( $args[0] );
-		$post_type = get_post_type_object( $post->post_type );
+
+	if ('edit_post2' == $cap || 'delete_post2' == $cap || 'read_post2' == $cap) {
+		$post = get_post($args[0]);
+		$post_type = get_post_type_object($post->post_type);
 
 		$caps = array();
 	}
 
-	if ( 'edit_post2' == $cap ) {
-		if ( $user_id == $post->post_author )
+	if ('edit_post2' == $cap) {
+		if ($user_id == $post->post_author)
 			$caps[] = $post_type->cap->edit_posts;
 		else
 			$caps[] = $post_type->cap->edit_others_posts;
 	}
 
-	elseif ( 'delete_post2' == $cap ) {
-		if ( $user_id == $post->post_author )
+	elseif ('delete_post2' == $cap) {
+		if ($user_id == $post->post_author)
 			$caps[] = $post_type->cap->delete_posts;
 		else
 			$caps[] = $post_type->cap->delete_others_posts;
 	}
 
-	elseif ( 'read_post2' == $cap ) {
+	elseif ('read_post2' == $cap) {
 
-		if ( 'private' != $post->post_status )
+		if ('private' != $post->post_status)
 			$caps[] = 'read';
-		elseif ( $user_id == $post->post_author )
+		elseif ($user_id == $post->post_author)
 			$caps[] = 'read';
 		else
 			$caps[] = $post_type->cap->read_private_posts;
 	}
-	
-	if ( 'edit_partner' == $cap || 'delete_partner' == $cap || 'read_partner' == $cap ) {
-		$post = get_post( $args[0] );
-		$post_type = get_post_type_object( $post->post_type );
+
+	if ('edit_partner' == $cap || 'delete_partner' == $cap || 'read_partner' == $cap) {
+		$post = get_post($args[0]);
+		$post_type = get_post_type_object($post->post_type);
 
 		$caps = array();
 	}
 
-	if ( 'edit_partner' == $cap ) {
-		if ( $user_id == $post->post_author )
+	if ('edit_partner' == $cap) {
+		if ($user_id == $post->post_author)
 			$caps[] = $post_type->cap->edit_posts;
 		else
 			$caps[] = $post_type->cap->edit_others_posts;
 	}
 
-	elseif ( 'delete_partner' == $cap ) {
-		if ( $user_id == $post->post_author )
+	elseif ('delete_partner' == $cap) {
+		if ($user_id == $post->post_author)
 			$caps[] = $post_type->cap->delete_posts;
 		else
 			$caps[] = $post_type->cap->delete_others_posts;
 	}
 
-	elseif ( 'read_partner' == $cap ) {
+	elseif ('read_partner' == $cap) {
 
-		if ( 'private' != $post->post_status )
+		if ('private' != $post->post_status)
 			$caps[] = 'read';
-		elseif ( $user_id == $post->post_author )
+		elseif ($user_id == $post->post_author)
 			$caps[] = 'read';
 		else
 			$caps[] = $post_type->cap->read_private_posts;
@@ -227,7 +228,74 @@ function my_map_meta_cap( $caps, $cap, $user_id, $args ) {
 	return $caps;
 }
 
-function add_oembed_slideshare(){
-wp_oembed_add_provider( 'http://www.slideshare.net/*', 'http://api.embed.ly/v1/api/oembed');
+function add_oembed_slideshare() {
+	wp_oembed_add_provider('http://www.slideshare.net/*', 'http://api.embed.ly/v1/api/oembed');
 }
-add_action('init','add_oembed_slideshare');
+
+add_action('init', 'add_oembed_slideshare');
+
+
+
+
+add_action('register_form', 'kdp_add_registration_fields');
+
+function kdp_add_registration_fields() {
+
+	$first_name = ( isset($_POST['first_name']) ) ? $_POST['first_name'] : '';
+	$last_name = ( isset($_POST['last_name']) ) ? $_POST['last_name'] : '';
+	?>
+
+	<p>
+		<label for="first_name">Imię<br />
+			<input type="text" name="first_name" id="first_name" class="input" value="<?php echo esc_attr(stripslashes($first_name)); ?>" size="25" /></label>
+	</p>
+	<p>
+		<label for="last_name">Nazwisko<br />
+			<input type="text" name="last_name" id="last_name" class="input" value="<?php echo esc_attr(stripslashes($last_name)); ?>" size="25" /></label>
+	</p>
+
+	<?php
+}
+
+add_filter('registration_errors', function($wp_error, $sanitized_user_login, $user_email) {
+	if (isset($wp_error->errors['empty_username'])) {
+		unset($wp_error->errors['empty_username']);
+	}
+
+	if (isset($wp_error->errors['username_exists'])) {
+		unset($wp_error->errors['username_exists']);
+	}
+	return $wp_error;
+}, 10, 3);
+
+add_action('login_form_register', function() {
+	if (isset($_POST['user_login']) && isset($_POST['user_email']) && !empty($_POST['user_email'])) {
+		$_POST['user_login'] = str_replace(array('@', '.', '+'), '_', $_POST['user_email']);
+	}
+});
+
+
+add_action('user_register', 'kdp_registration_save', 10, 1);
+
+function kdp_registration_save($user_id) {
+	if (isset($_POST['first_name'])) {
+		update_user_meta($user_id, 'first_name', $_POST['first_name']);
+	}
+	if (isset($_POST['last_name'])) {
+		update_user_meta($user_id, 'last_name', $_POST['last_name']);
+	}
+}
+
+add_action('login_head', function() {
+	?>
+	<style>
+		#registerform > p:first-child, #registerform .acf-field{
+			display:none;
+		}
+		#registerform  .acf-field-image {
+			display:block;
+		}
+	</style>
+	<?php
+});
+

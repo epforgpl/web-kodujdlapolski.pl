@@ -36,15 +36,19 @@ if (isset($_POST['g-recaptcha-response'])):
 								'<br>projekt: ' . get_the_title($pid) .
 								'<br>wiadomość: ' . nl2br($_POST['message']);
 			}
-			wp_mail(get_field('mail', $pid), $title, $content, $headers, $attachments);
 			wp_mail($_POST['email'], $title, $content, $headers, $attachments);
-			wp_mail('piotr@kliks.eu', $title, $content, $headers, $attachments);
+			
+			$headers .= 'Cc: kontakt@kodujdlapolski.pl';
+			wp_mail(get_field('mail', $pid), $title, $content, $headers, $attachments);
+			
+			
+			
+			//wp_mail('piotr@kliks.eu', $title, $content, $headers, $attachments);
 			unlink($attachments[0]);
 
 			$success = 1;
 		}
-	}
-	else {
+	} else {
 		$success = 2;
 	}
 endif;
@@ -70,18 +74,19 @@ endif;
 				<img src="<?php echo $img['sizes']['large']; ?>" class="mb40" />
 				<div class="row">
 					<div class="small-12 medium-9 columns">
-						<div class="content">
+						<div class="content text-justify">
 							<?php the_content(); ?>
 							<?php
 							$topics = wp_get_post_terms(get_the_ID(), 'filters');
 							$ret = '';
 							foreach ($topics as $topic):
 								if ($topic->parent != icl_object_id(84, 'filters', true)) {
-									$ret[$topic->parent] = $topic->name . ', ';
+									$ret[$topic->parent] .= $topic->name . ', ';
 								}
 							endforeach;
 							?>
 							<div class="mt20 mb20">
+								<strong><?php _e('Project page updated') ?>:</strong> <?php echo get_the_modified_date(); ?><br />
 								<?php foreach ($ret as $key => $r): ?>
 									<strong><?php
 										$t = get_term($key, 'filters');
@@ -89,8 +94,20 @@ endif;
 										?>:</strong> <?php echo rtrim($r, ', '); ?><br />
 								<?php endforeach; ?>
 							</div>
-
-							<div class="text-center mt20 mb30"><a data-open="mailModal2" class="btn red bigger"><?php _e('Contact with coordinator'); ?></a></div>
+							<?php
+							$coordinator = get_field('btn_name');
+							?>
+							<div class="text-center mt20 mb30">
+								<a data-open="mailModal2" class="btn red bigger">
+									<?php
+									if ($coordinator) {
+										printf(__('Contact %s - project coordinator'), $coordinator);
+									} else {
+										_e('Contact with coordinator');
+									}
+									?>
+								</a>
+							</div>
 
 							<ul class="project-links">
 								<?php
@@ -110,28 +127,33 @@ endif;
 													<?php echo wp_oembed_get($link['url']); ?>
 												<?php elseif (strstr($link['url'], 'forum.koduj')): ?>
 													<div class="show-for-large">
-														<div id="discourse-comments"></div>
-														<script type="text/javascript">
-															var discourseUrl = "https://forum.kodujdlapolski.pl/";
-															function showDiscourseTopic(topic) {
-																var comments = document.getElementById('discourse-comments');
-																var iframe = document.getElementById('discourse-embed-frame');
-																if (iframe) {
-																	iframe.remove();
+														<div class="embed-wrapper">
+															<a href="<?php echo $link['url']; ?>/" class="btn red embed-link" target="_blank"><?php echo $link['name']; ?></a>
+															<div id="discourse-comments"></div>
+															<script type="text/javascript">
+																var discourseUrl = "https://forum.kodujdlapolski.pl/";
+																function showDiscourseTopic(topic) {
+																	var comments = document.getElementById('discourse-comments');
+																	var iframe = document.getElementById('discourse-embed-frame');
+																	if (iframe) {
+																		iframe.remove();
+																	}
+																	iframe = document.createElement('iframe');
+																	iframe.src = '<?php echo $link['url']; ?>';
+																	iframe.id = 'discourse-embed-frame';
+																	iframe.width = '100%';
+																	iframe.height = '500px';
+																	iframe.frameBorder = '0';
+																	iframe.scrolling = 'yes';
+																	comments.appendChild(iframe);
 																}
-																iframe = document.createElement('iframe');
-																iframe.src = '<?php echo $link['url']; ?>';
-																iframe.id = 'discourse-embed-frame';
-																iframe.width = '100%';
-																iframe.height = '500px';
-																iframe.frameBorder = '0';
-																iframe.scrolling = 'yes';
-																comments.appendChild(iframe);
-															}
-															;
-															showDiscourseTopic('');
-														</script>
-														<a href="<?php echo $link['url']; ?>" class="fright" target="_blank">Otwórz forum w nowym oknie &GT; </a>
+																;
+																showDiscourseTopic('');
+															</script>
+															<div class="text-right">
+															<a href="<?php echo $link['url']; ?>" target="_blank">Otwórz forum w nowym oknie &GT; </a>
+															</div>
+														</div>
 													</div>
 													<div class="hide-for-large">
 														<a href="<?php echo $link['url']; ?>"><?php echo $link['name']; ?> &GT; </a>
@@ -145,126 +167,71 @@ endif;
 													?>
 													<iframe src="<?php echo $url; ?>?start=false&loop=false&delayms=10000" frameborder="0" width="480" height="375" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 												<?php elseif (strstr($link['url'], 'github')): ?>
-													<?php
-													$ar = explode('/', $link['url']);
-													?>
-													<h3>GitHub: <?php echo $ar[3] . ' / ' . $ar[4]; ?></h3>
-													<?php
-													if (false === ($git_langs = get_transient('github_languages_' . $ar[3] . '_' . $ar[4]))):
-														$ch = curl_init('https://api.github.com/repos/' . $ar[3] . '/' . $ar[4] . '/languages');
-														curl_setopt($ch, CURLOPT_HEADER, 0);
-														curl_setopt($ch, CURLOPT_USERAGENT, 'KdP');
-														curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-														$git_langs = curl_exec($ch);
-														curl_close($ch);
-														set_transient('github_languages_' . $ar[3] . '_' . $ar[4], $git_langs, 12 * 3600);
-													endif;
-
-													$obj = json_decode($git_langs);
-													$i = 0;
-													$sum = 0;
-													foreach ($obj as $key => $o) {
-														$sum += $o;
-														$i++;
-													}
-													$j = 0;
-													?>
-													<div class="row large-up-<?php echo $i; ?> languages">
-														<?php foreach ($obj as $key => $o): ?>
-															<div class="column"><?php /* <div class="color-dot" style="background:#<?php echo $j * 2; ?>1<?php echo $j; ?>1<?php echo $j; ?><?php echo $j; ?>;"></div> */ ?><?php echo $key; ?> <span><?php echo round($o / $sum * 100, 2); ?>%</span></div>
-															<?php
-															$j++;
-														endforeach;
-														?>
-													</div>
-													<?php
-													if (false === ($git_issues = get_transient('tmp_github_issues_' . $ar[3] . '_' . $ar[4]))):
-														$ch = curl_init('https://api.github.com/repos/' . $ar[3] . '/' . $ar[4] . '/issues');
-														curl_setopt($ch, CURLOPT_HEADER, 0);
-														curl_setopt($ch, CURLOPT_USERAGENT, 'KdP');
-														curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-														$git_issues = curl_exec($ch);
-														curl_close($ch);
-														set_transient('tmp_github_issues_' . $ar[3] . '_' . $ar[4], $git_issues, 12 * 3600);
-													endif;
-
-													$obj = json_decode($git_issues);
-
-													$b = 0;
-													if ($obj):
-														?>
-														<div class="issues-wrapper mt20 mb20">
-															<div class="title-row"><a href="<?php echo $link['url']; ?>/issues/" target="_blank"><?php _e('Issues from GitHub'); ?></a></div>
-															<?php foreach ($obj as $o): ?>
-																<?php //print_r($o);  ?>
-																<div class="issue-row">
-																	<div class="title-col">
-																		<a href="<?php echo $o->url; ?>" target="_blank"><?php echo $o->title; ?></a>
-																		<div class="meta-data">#<?php echo $o->number; ?> <?php _e('opened on'); ?> <?php echo date_i18n('d M Y', strtotime($o->created_at)); ?> <?php _e('by'); ?> <?php echo $o->user->login; ?> <?php _e('updated on'); ?> <?php echo date_i18n('d M Y', strtotime($o->updated_at)); ?></div>
-																	</div>
-																	<div class="assignee-col">
-																		<?php
-																		if ($o->assignee->gravatar_id) {
-																			$av = $o->assignee->gravatar_id;
-																		} else {
-																			$av = $o->assignee->avatar_url;
-																		}
-																		if ($av):
-																			?>
-																			<img src="<?php echo $av; ?>" />
-																		<?php else: ?>
-																			&nbsp;
-																		<?php endif; ?>
-																	</div>
-																	<div class="comments-col">
-																		<i class="fa fa-comment-o"></i> <?php echo $o->comments; ?>
-																	</div>
-																</div>
-
-																<?php
-																if ($b == 2) {
-																	break;
-																}
-																?>
-																<?php
-																$b++;
-															endforeach;
-															?>
-															<a href="<?php echo $link['url']; ?>/issues/" class="sm-link" target="_blank"><?php _e('See more'); ?> <i class="fa fa-angle-right"></i></a>
-														</div>
-
-
-
+													<div class="embed-wrapper">
 														<?php
-														if (false === ($git_commits = get_transient('github_commits_' . $ar[3] . '_' . $ar[4]))):
-															$ch = curl_init('https://api.github.com/repos/' . $ar[3] . '/' . $ar[4] . '/commits');
+														$ar = explode('/', $link['url']);
+														?>
+														<a href="<?php echo $link['url']; ?>/" class="btn red embed-link" target="_blank"><?php _e('Github'); ?> - <?php echo $ar[4]; ?></a>
+														<h3>GitHub: <?php echo $ar[3] . ' / ' . $ar[4]; ?></h3>
+														<?php
+														if (false === ($git_langs = get_transient('github_languages_' . $ar[3] . '_' . $ar[4]))):
+															$ch = curl_init('https://api.github.com/repos/' . $ar[3] . '/' . $ar[4] . '/languages');
 															curl_setopt($ch, CURLOPT_HEADER, 0);
 															curl_setopt($ch, CURLOPT_USERAGENT, 'KdP');
 															curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-															$git_commits = curl_exec($ch);
+															$git_langs = curl_exec($ch);
 															curl_close($ch);
-															set_transient('github_commits_' . $ar[3] . '_' . $ar[4], $git_commits, 12 * 3600);
+															set_transient('github_languages_' . $ar[3] . '_' . $ar[4], $git_langs, 12 * 3600);
 														endif;
 
-														$obj = json_decode($git_commits);
+														$obj = json_decode($git_langs);
+														$i = 0;
+														$sum = 0;
+														foreach ($obj as $key => $o) {
+															$sum += $o;
+															$i++;
+														}
+														$j = 0;
+														?>
+														<div class="row large-up-<?php echo $i; ?> languages">
+															<?php foreach ($obj as $key => $o): ?>
+																<div class="column"><?php /* <div class="color-dot" style="background:#<?php echo $j * 2; ?>1<?php echo $j; ?>1<?php echo $j; ?><?php echo $j; ?>;"></div> */ ?><?php echo $key; ?> <span><?php echo round($o / $sum * 100, 2); ?>%</span></div>
+																<?php
+																$j++;
+															endforeach;
+															?>
+														</div>
+														<?php
+														if (false === ($git_issues = get_transient('tmp_github_issues_' . $ar[3] . '_' . $ar[4]))):
+															$ch = curl_init('https://api.github.com/repos/' . $ar[3] . '/' . $ar[4] . '/issues');
+															curl_setopt($ch, CURLOPT_HEADER, 0);
+															curl_setopt($ch, CURLOPT_USERAGENT, 'KdP');
+															curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+															$git_issues = curl_exec($ch);
+															curl_close($ch);
+															set_transient('tmp_github_issues_' . $ar[3] . '_' . $ar[4], $git_issues, 12 * 3600);
+														endif;
+
+														$obj = json_decode($git_issues);
 
 														$b = 0;
 														if ($obj):
 															?>
 															<div class="issues-wrapper mt20 mb20">
-																<div class="title-row"><a href="<?php echo $link['url']; ?>/commits/" target="_blank"><?php _e('Commits from GitHub'); ?></a></div>
+																<div class="title-row"><a href="<?php echo $link['url']; ?>/issues/" target="_blank"><?php _e('Issues from GitHub'); ?></a></div>
 																<?php foreach ($obj as $o): ?>
+																	<?php //print_r($o);   ?>
 																	<div class="issue-row">
 																		<div class="title-col">
-																			<a href="<?php echo $o->html_url; ?>" target="_blank"><?php echo $o->commit->message; ?></a>
-																			<div class="meta-data"><?php echo date_i18n('d M Y', strtotime($o->commit->committer->date)); ?> <?php _e('by'); ?> <?php echo $o->commit->committer->name; ?></div>
+																			<a href="<?php echo $o->url; ?>" target="_blank"><?php echo $o->title; ?></a>
+																			<div class="meta-data">#<?php echo $o->number; ?> <?php _e('opened on'); ?> <?php echo date_i18n('d M Y', strtotime($o->created_at)); ?> <?php _e('by'); ?> <?php echo $o->user->login; ?> <?php _e('updated on'); ?> <?php echo date_i18n('d M Y', strtotime($o->updated_at)); ?></div>
 																		</div>
 																		<div class="assignee-col">
 																			<?php
-																			if ($o->committer->gravatar_id) {
-																				$av = $o->committer->gravatar_id;
+																			if ($o->assignee->gravatar_id) {
+																				$av = $o->assignee->gravatar_id;
 																			} else {
-																				$av = $o->committer->avatar_url;
+																				$av = $o->assignee->avatar_url;
 																			}
 																			if ($av):
 																				?>
@@ -272,6 +239,9 @@ endif;
 																			<?php else: ?>
 																				&nbsp;
 																			<?php endif; ?>
+																		</div>
+																		<div class="comments-col">
+																			<i class="fa fa-comment-o"></i> <?php echo $o->comments; ?>
 																		</div>
 																	</div>
 
@@ -284,18 +254,72 @@ endif;
 																	$b++;
 																endforeach;
 																?>
-																<a href="<?php echo $link['url']; ?>/commits/" class="sm-link" target="_blank"><?php _e('See more'); ?> <i class="fa fa-angle-right"></i></a>	
+																<a href="<?php echo $link['url']; ?>/issues/" class="sm-link" target="_blank"><?php _e('See more'); ?> <i class="fa fa-angle-right"></i></a>
 															</div>
-															<a href="<?php echo $link['url']; ?>/" class="btn red mb15" target="_blank"><?php _e('Github'); ?> - <?php echo $ar[4]; ?></a>
+
+
+
+															<?php
+															if (false === ($git_commits = get_transient('github_commits_' . $ar[3] . '_' . $ar[4]))):
+																$ch = curl_init('https://api.github.com/repos/' . $ar[3] . '/' . $ar[4] . '/commits');
+																curl_setopt($ch, CURLOPT_HEADER, 0);
+																curl_setopt($ch, CURLOPT_USERAGENT, 'KdP');
+																curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+																$git_commits = curl_exec($ch);
+																curl_close($ch);
+																set_transient('github_commits_' . $ar[3] . '_' . $ar[4], $git_commits, 12 * 3600);
+															endif;
+
+															$obj = json_decode($git_commits);
+
+															$b = 0;
+															if ($obj):
+																?>
+																<div class="issues-wrapper mt20 mb20">
+																	<div class="title-row"><a href="<?php echo $link['url']; ?>/commits/" target="_blank"><?php _e('Commits from GitHub'); ?></a></div>
+																	<?php foreach ($obj as $o): ?>
+																		<div class="issue-row">
+																			<div class="title-col">
+																				<a href="<?php echo $o->html_url; ?>" target="_blank"><?php echo $o->commit->message; ?></a>
+																				<div class="meta-data"><?php echo date_i18n('d M Y', strtotime($o->commit->committer->date)); ?> <?php _e('by'); ?> <?php echo $o->commit->committer->name; ?></div>
+																			</div>
+																			<div class="assignee-col">
+																				<?php
+																				if ($o->committer->gravatar_id) {
+																					$av = $o->committer->gravatar_id;
+																				} else {
+																					$av = $o->committer->avatar_url;
+																				}
+																				if ($av):
+																					?>
+																					<img src="<?php echo $av; ?>" />
+																				<?php else: ?>
+																					&nbsp;
+																				<?php endif; ?>
+																			</div>
+																		</div>
+
+																		<?php
+																		if ($b == 2) {
+																			break;
+																		}
+																		?>
+																		<?php
+																		$b++;
+																	endforeach;
+																	?>
+																	<a href="<?php echo $link['url']; ?>/commits/" class="sm-link" target="_blank"><?php _e('See more'); ?> <i class="fa fa-angle-right"></i></a>	
+																</div>
+															<?php endif; ?>
 														<?php endif; ?>
-													<?php endif; ?>
+													</div>
 												<?php else: ?>
-													<a href="<?php echo $link['url']; ?>"><?php echo $link['name']; ?> &GT; </a>
+													<a href="<?php echo $link['url']; ?>" class="btn red"><?php echo $link['name']; ?> &GT; </a>
 												<?php
 												endif;
 												?>
 											<?php else: ?>
-												<a href="<?php echo $link['url']; ?>"><?php echo $link['name']; ?> &GT; </a>
+												<a href="<?php echo $link['url']; ?>" class="btn red"><?php echo $link['name']; ?> &GT; </a>
 											<?php endif; ?>
 										</li>
 									<?php endforeach; ?>
@@ -382,14 +406,23 @@ endif;
 							setup_postdata($post);
 							$logo = get_field('logo');
 							$url = get_field('url');
+							$content = get_the_content();
 							?>
 							<div class="partner-box">
 								<?php if ($url): ?>
-									<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" /></a>
-									<h3><a href="<?php echo $url; ?>"><?php the_title(); ?></a></h3>
+									<div class="text-center">
+										<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" /></a>
+									</div>
+									<?php if (empty($content)): ?>
+										<h3><a href="<?php echo $url; ?>"><?php the_title(); ?></a></h3>
+									<?php endif; ?>
 								<?php else: ?>
-									<img src="<?php echo $logo['sizes']['medium']; ?>" />
-									<h3><?php the_title(); ?></h3>
+									<div class="text-center">
+										<img src="<?php echo $logo['sizes']['medium']; ?>" />
+									</div>
+									<?php if (empty($content)): ?>
+										<h3><?php the_title(); ?></h3>
+									<?php endif; ?>
 								<?php endif; ?>
 								<div class="content">
 									<?php the_content(); ?>
@@ -460,7 +493,7 @@ endif;
 								$url = get_field('url');
 								?>
 								<div class="column">
-									<div class="partner-wrapper">
+									<div class="partner-wrapper text-center">
 										<?php if ($url): ?>
 											<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" /></a>
 										<?php else: ?>

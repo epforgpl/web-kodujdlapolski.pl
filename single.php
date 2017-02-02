@@ -22,7 +22,7 @@
 					<img src="<?php echo $url; ?>" class="mb40" />
 				<?php endif; ?>
 
-				<div class="content"><?php the_content(); ?></div>
+				<div class="content text-justify"><?php the_content(); ?></div>
 			</div>
 			<div class="small-12 medium-3 columns post-author">
 				<?php
@@ -56,7 +56,7 @@
 	<?php
 	$args = array(
 			'post_type' => 'post',
-			'posts_per_page' => 3,
+			'posts_per_page' => 3
 	);
 
 	$query = new WP_Query($args);

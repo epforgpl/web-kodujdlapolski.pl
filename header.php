@@ -19,7 +19,7 @@ $src = get_template_directory_uri();
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $src ?>/css/normalize.css" />
 		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $src ?>/css/foundation.min.css" />
-		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $src ?>/style.css?v=1.06" />
+		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $src ?>/style.css?v=1.08" />
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 		<link rel="icon" href="<?php echo $src ?>/images/favicon.png" type="image/png"/>
 		<?php
@@ -62,14 +62,30 @@ $src = get_template_directory_uri();
 								js.src = "//connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.5&appId=155938441448129";
 								fjs.parentNode.insertBefore(js, fjs);
 							}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Hotjar Tracking Code for http://kodujdlapolski.pl/ -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:345609,hjsv:5};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
 		<header>
 			<div class="ep-top">
 				<div class="row">
-					<div class="small-10 large-6 columns">
-                <a target="_blank" href="http://epf.org.pl/">Program Fundacji ePaństwo<img src="<?php echo $src; ?>/images/eplogo.png"/></a>
+					<div class="small-12 medium-6 large-6 columns text-center medium-text-left">
+            <a target="_blank" href="http://epf.org.pl/">Program Fundacji ePaństwo<img src="<?php echo $src; ?>/images/eplogo.png"/></a>
 					</div>
-					<div class="small-2 large-6 columns text-right">
-						<a href="https://www.facebook.com/KodujDlaPolski/" target="_blank"><img src="<?php echo $src; ?>/images/fb-icon.png" /></a>
+					<div class="small-12 medium-6 large-6 columns text-center medium-text-right social-links">
+						<a href="<?php the_field('irc_url', 'options'); ?>" target="_blank"><img src="<?php echo $src; ?>/images/irc.png" alt="IRC" /></a>
+						<a href="<?php the_field('youtube_url', 'options'); ?>" target="_blank"><i class="fa fa-youtube-square"></i></a>
+						<a href="<?php the_field('twitter_url', 'options'); ?>" target="_blank"><i class="fa fa-twitter-square"></i></a>
+						<a href="<?php the_field('facebook_url', 'options'); ?>" target="_blank"><i class="fa fa-facebook-square"></i></a>
 					</div>
 					<div class="small-12 columns show-for-large"><hr /></div>
 				</div>

@@ -156,7 +156,7 @@ global $success;
 								$(document).foundation();
 								var src = '<?php echo $src; ?>';
 </script>
-<script src="<?php echo $src ?>/js/main.js?v=1.01"></script>
+<script src="<?php echo $src ?>/js/main.js?v=1.02"></script>
 
 <?php if ($success == 1): ?>
 	<script>
