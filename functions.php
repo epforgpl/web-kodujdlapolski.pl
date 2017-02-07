@@ -299,3 +299,9 @@ add_action('login_head', function() {
 	<?php
 });
 
+add_filter( 'xmlrpc_methods', 'remove_xmlrpc_pingback_ping' );
+function remove_xmlrpc_pingback_ping( $methods ) {
+	unset( $methods['pingback.ping'] );
+	return $methods;
+};
+
