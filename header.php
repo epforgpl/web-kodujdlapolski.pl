@@ -83,7 +83,8 @@ $src = get_template_directory_uri();
 					</div>
 					<div class="small-12 medium-6 large-6 columns text-center medium-text-right social-links">
 						<a href="<?php the_field('irc_url', 'options'); ?>" target="_blank"><img src="<?php echo $src; ?>/images/irc.png" alt="IRC" /></a>
-						<a href="<?php the_field('youtube_url', 'options'); ?>" target="_blank"><i class="fa fa-youtube-square"></i></a>
+						<a href="<?php the_field('slack_url', 'options'); ?>" target="_blank"><i class="fa fa-slack"></i></a>
+					        <a href="<?php the_field('youtube_url', 'options'); ?>" target="_blank"><i class="fa fa-youtube-square"></i></a>
 						<a href="<?php the_field('twitter_url', 'options'); ?>" target="_blank"><i class="fa fa-twitter-square"></i></a>
 						<a href="<?php the_field('facebook_url', 'options'); ?>" target="_blank"><i class="fa fa-facebook-square"></i></a>
 					</div>
