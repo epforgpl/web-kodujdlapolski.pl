@@ -103,7 +103,7 @@ endif;
 									if ($coordinator) {
 										printf(__('Contact %s - project coordinator'), $coordinator);
 									} else {
-										_e('Contact with coordinator');
+										_e('Contact coordinator');
 									}
 									?>
 								</a>
