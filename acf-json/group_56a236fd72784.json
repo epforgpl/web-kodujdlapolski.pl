@@ -1,0 +1,60 @@
+{
+    "key": "group_56a236fd72784",
+    "title": "Kontakt",
+    "fields": [
+        {
+            "role": "",
+            "multiple": 0,
+            "allow_null": 0,
+            "key": "field_56a2375683fb0",
+            "label": "Og\u00f3lnopolski",
+            "name": "main",
+            "type": "user",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "role": "",
+            "multiple": 1,
+            "allow_null": 0,
+            "key": "field_56a2377aa0b1a",
+            "label": "Lokalni",
+            "name": "local",
+            "type": "user",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            }
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-contact.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content"
+    ],
+    "active": 1,
+    "description": "",
+    "modified": 1510740825
+}

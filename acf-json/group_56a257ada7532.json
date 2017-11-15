@@ -1,0 +1,271 @@
+{
+    "key": "group_56a257ada7532",
+    "title": "Spotkania",
+    "fields": [
+        {
+            "return_format": "array",
+            "preview_size": "thumbnail",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "key": "field_56a257dc61b3c",
+            "label": "Baner",
+            "name": "baner",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "taxonomy": "category",
+            "field_type": "checkbox",
+            "multiple": 0,
+            "allow_null": 0,
+            "return_format": "id",
+            "add_term": 1,
+            "load_terms": 0,
+            "save_terms": 0,
+            "key": "field_56b8bbc4d2f4f",
+            "label": "Wy\u015bwietl posty z kategorii",
+            "name": "blog_posts",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "role": "",
+            "multiple": 1,
+            "allow_null": 0,
+            "key": "field_56a2580161b3d",
+            "label": "Koordynatorzy",
+            "name": "coordinators",
+            "type": "user",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "multiple": 0,
+            "allow_null": 0,
+            "choices": {
+                "logo": "Tylko logo",
+                "lista": "Lista z opisem"
+            },
+            "default_value": [
+
+            ],
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "return_format": "value",
+            "key": "field_56a2581d61b3e",
+            "label": "Partnerzy - spos\u00f3b wy\u015bwietlenia",
+            "name": "partners_template",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "disabled": 0,
+            "readonly": 0
+        },
+        {
+            "post_type": [
+                "partners"
+            ],
+            "taxonomy": [
+
+            ],
+            "min": "",
+            "max": "",
+            "filters": [
+                "search",
+                "post_type",
+                "taxonomy"
+            ],
+            "elements": "",
+            "return_format": "object",
+            "key": "field_56a25d501de63",
+            "label": "Partnerzy",
+            "name": "partners",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "key": "field_56a3736bab4b6",
+            "label": "Meetup url",
+            "name": "meetup_url",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "key": "field_56a37377ab4b8",
+            "label": "Facebook url",
+            "name": "facebook_url",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "sub_fields": [
+                {
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "key": "field_56a25b25c39ca",
+                    "label": "Miasto",
+                    "name": "city",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "readonly": 0,
+                    "disabled": 0
+                }
+            ],
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "Dodaj wiersz",
+            "collapsed": "",
+            "key": "field_56a25ab3c39c9",
+            "label": "Frazy event\u00f3w FB",
+            "name": "fb_cities",
+            "type": "repeater",
+            "instructions": "Nazwy miast na potrzeby \u0142adowania spotka\u0144 z FB, bez polskich liter",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            }
+        },
+        {
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "key": "field_56a25e3b9c0c7",
+            "label": "X na mapie",
+            "name": "axis_x",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "readonly": 0,
+            "disabled": 0
+        },
+        {
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "key": "field_56a25e469c0c8",
+            "label": "Y na mapie",
+            "name": "axis_y",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "readonly": 0,
+            "disabled": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "cities"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1510740839
+}
