@@ -51,7 +51,6 @@ $src = get_template_directory_uri();
 
 
 	<body <?php body_class(); ?> >
-<script type="text/javascript" src="https://blackout.mojepanstwo.pl/blackout.js"></script>
 		<div id="fb-root"></div>
 		<script>(function (d, s, id) {
 								var js, fjs = d.getElementsByTagName(s)[0];
