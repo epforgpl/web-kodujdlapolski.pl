@@ -3775,4 +3775,21 @@ table.hover tr:nth-of-type(even):hover {
 .top-bar-right {
   float: right; }
 
+
+#polityka_prywatnosci ol {
+  counter-reset: item; }
+#polityka_prywatnosci li {
+  display: block; }
+#polityka_prywatnosci li:before {
+  content: counters(item,".") " ";
+  counter-increment: item; }
+#polityka_prywatnosci span.header {
+  font-weight: bold; }
+#polityka_prywatnosci li:before {
+  font-weight: bold; }
+#polityka_prywatnosci li {
+  line-height: 1.5rem; }
+#polityka_prywatnosci ol {
+  margin-bottom: 1.5rem; }
+
 /*# sourceMappingURL=foundation.css.map */
