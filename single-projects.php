@@ -352,7 +352,7 @@ endif;
 													$user_photo = $src . '/images/blank-person2.jpg';
 												}
 												?>
-												<a href="<?php echo get_author_posts_url($member['person']['ID']); ?>"><img src="<?php echo $user_photo; ?>" /></a>
+												<a href="<?php echo get_author_posts_url($member['person']['ID']); ?>"><img src="<?php echo $user_photo; ?>" alt="<?php echo $member['person']['display_name'] ?>" /></a>
 											</td>
 											<td class="desc">
 												<h4><a href="<?php echo get_author_posts_url($member['person']['ID']); ?>"><?php echo $member['person']['display_name'] ?></a></h4>
@@ -489,15 +489,16 @@ endif;
 							<?php
 							foreach ($posts as $post):
 								setup_postdata($post);
+								$title = get_the_title();
 								$logo = get_field('logo');
 								$url = get_field('url');
 								?>
 								<div class="column">
 									<div class="partner-wrapper text-center">
 										<?php if ($url): ?>
-											<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" /></a>
+											<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php echo $title ?>" /></a>
 										<?php else: ?>
-											<img src="<?php echo $logo['sizes']['medium']; ?>" />
+											<img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php echo $title ?>" />
 										<?php endif; ?>
 									</div>
 								</div>

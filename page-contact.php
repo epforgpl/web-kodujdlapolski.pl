@@ -41,7 +41,7 @@
                       $function = get_field('function_en', 'user_' . $member['ID']);
                     }
                     ?>
-                    <a href="<?php echo get_author_posts_url($member['ID']); ?>"><img src="<?php echo $user_photo; ?>" /></a>
+                    <a href="<?php echo get_author_posts_url($member['ID']); ?>"><img src="<?php echo $user_photo; ?>" alt="<?php echo $member['display_name'] ?>" /></a>
                   </td>
                   <td class="desc">
                     <h4><a href="<?php echo get_author_posts_url($member['ID']); ?>"><?php echo $member['display_name'] ?></a></h4>
@@ -83,7 +83,7 @@
                         $function = get_field('function_en', 'user_' . $member['ID']);
                       }
                       ?>
-                      <a href="<?php echo get_author_posts_url($member['ID']); ?>"><img src="<?php echo $user_photo; ?>" /></a>
+                      <a href="<?php echo get_author_posts_url($member['ID']); ?>"><img src="<?php echo $user_photo; ?>" alt="<?php echo $member['display_name'] ?>" /></a>
                     </td>
                     <td class="desc">
                       <h4><a href="<?php echo get_author_posts_url($member['ID']); ?>"><?php echo $member['display_name'] ?></a></h4>
