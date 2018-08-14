@@ -305,3 +305,4 @@ function remove_xmlrpc_pingback_ping( $methods ) {
 	return $methods;
 };
 
+remove_action('wp_head', 'wp_generator');
