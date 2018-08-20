@@ -411,14 +411,14 @@ endif;
 							<div class="partner-box">
 								<?php if ($url): ?>
 									<div class="text-center">
-										<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" /></a>
+										<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php the_title(); ?>" /></a>
 									</div>
 									<?php if (empty($content)): ?>
 										<h3><a href="<?php echo $url; ?>"><?php the_title(); ?></a></h3>
 									<?php endif; ?>
 								<?php else: ?>
 									<div class="text-center">
-										<img src="<?php echo $logo['sizes']['medium']; ?>" />
+										<img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php the_title(); ?>" />
 									</div>
 									<?php if (empty($content)): ?>
 										<h3><?php the_title(); ?></h3>
@@ -489,16 +489,15 @@ endif;
 							<?php
 							foreach ($posts as $post):
 								setup_postdata($post);
-								$title = get_the_title();
 								$logo = get_field('logo');
 								$url = get_field('url');
 								?>
 								<div class="column">
 									<div class="partner-wrapper text-center">
 										<?php if ($url): ?>
-											<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php echo $title ?>" /></a>
+											<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php the_title(); ?>" /></a>
 										<?php else: ?>
-											<img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php echo $title ?>" />
+											<img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php the_title(); ?>" />
 										<?php endif; ?>
 									</div>
 								</div>

@@ -248,10 +248,10 @@ else:
 								?>
 								<div class="partner-box">
 									<?php if ($url): ?>
-										<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" /></a>
+										<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php the_title(); ?>" /></a>
 										<h3><a href="<?php echo $url; ?>"><?php the_title(); ?></a></h3>
 									<?php else: ?>
-										<img src="<?php echo $logo['sizes']['medium']; ?>" />
+										<img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php the_title(); ?>" />
 										<h3><?php the_title(); ?></h3>
 									<?php endif; ?>
 									<div class="content">
@@ -317,9 +317,9 @@ else:
 									<div class="column">
 										<div class="partner-wrapper">
 											<?php if ($url): ?>
-												<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" /></a>
+												<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php the_title(); ?>" /></a>
 											<?php else: ?>
-												<img src="<?php echo $logo['sizes']['medium']; ?>" />
+												<img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php the_title(); ?>" />
 											<?php endif; ?>
 										</div>
 									</div>

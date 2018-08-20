@@ -14,16 +14,15 @@ global $success;
 		if ($posts):
 			foreach ($posts as $post):
 				setup_postdata($post);
-				$title = get_the_title();
 				$logo = get_field('logo');
 				$url = get_field('url');
 				?>
 				<div class="column">
 					<div class="partner-wrapper">
 						<?php if ($url): ?>
-							<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php echo $title ?>" /></a>
+							<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php the_title(); ?>" /></a>
 						<?php else: ?>
-							<img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php echo $title ?>" />
+							<img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php the_title(); ?>" />
 						<?php endif; ?>
 					</div>
 				</div>

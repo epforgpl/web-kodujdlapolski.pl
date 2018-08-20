@@ -38,7 +38,7 @@
 								<div class="partner-box">
 									<?php if ($url): ?>
 										<div class="text-center">
-											<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" /></a>
+											<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php the_title(); ?>" /></a>
 										</div>
 										<?php if (empty($content)): ?>
 											<h3><a href="<?php echo $url; ?>"><?php the_title(); ?></a></h3>
