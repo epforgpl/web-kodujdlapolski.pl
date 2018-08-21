@@ -78,7 +78,7 @@ $src = get_template_directory_uri();
 			<div class="ep-top">
 				<div class="row">
 					<div class="small-12 medium-6 large-6 columns text-center medium-text-left">
-            <a target="_blank" href="http://epf.org.pl/">Program Fundacji ePaństwo<img src="<?php echo $src; ?>/images/eplogo.png"/></a>
+            <a target="_blank" href="http://epf.org.pl/"><?php _e('ePaństwo Foundation program') ?><img src="<?php echo $src; ?>/images/eplogo.png" alt="<?php _e('ePaństwo Foundation program') ?>" /></a>
 					</div>
 					<div class="small-12 medium-6 large-6 columns text-center medium-text-right social-links">
 						<a href="<?php the_field('irc_url', 'options'); ?>" target="_blank"><img src="<?php echo $src; ?>/images/irc.png" alt="IRC" /></a>
@@ -95,7 +95,7 @@ $src = get_template_directory_uri();
 					<?php wp_nav_menu(array('theme_location' => 'primary', 'menu_class' => 'text-center main-menu')); ?>
 				</div>
 				<div class="small-6 large-2 columns large-text-center">
-					<a href="<?php echo home_url(); ?>"><img src="<?php echo $src; ?>/images/logo.png" /></a>
+					<a href="<?php echo home_url(); ?>"><img src="<?php echo $src; ?>/images/logo.png" alt="<?php bloginfo( 'name' ); ?>" /></a>
 				</div>
 				<div class="small-5 columns show-for-large relative">
 					<?php wp_nav_menu(array('theme_location' => 'primary2', 'menu_class' => 'text-center main-menu')); ?>

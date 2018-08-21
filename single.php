@@ -27,6 +27,7 @@
 			<div class="small-12 medium-3 columns post-author">
 				<?php
 				$author_id = get_the_author_meta('ID');
+				$display_name = get_the_author_meta('display_name');
 				$photo = get_field('photo', 'user_' . $author_id);
 				$user_photo = $photo['sizes']['medium'];
 				if (!$user_photo) {
@@ -36,7 +37,7 @@
 					$user_photo = $src . '/images/blank-person2.jpg';
 				}
 				?>
-				<img src="<?php echo $user_photo; ?>" />
+				<img src="<?php echo $user_photo; ?>" alt="<?php echo $display_name ?>" />
 				<h4><?php the_author(); ?></h4>
 				<div class="author-description"><?php the_author_meta('description'); ?></div>
 				<a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" class="btn red mt15"><?php _e('More from this author'); ?></a>

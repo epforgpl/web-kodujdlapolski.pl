@@ -7,6 +7,7 @@
 	<div class="small-2 columns">
 		<?php
 		$author_id = get_the_author_meta('ID');
+		$display_name = get_the_author_meta('display_name');
 		$photo = get_field('photo', 'user_' . $author_id);
 		$user_photo = $photo['sizes']['medium'];
 		if (!$user_photo) {
@@ -16,7 +17,7 @@
 			$user_photo = $src . '/images/blank-person.png';
 		}
 		?>
-		<img src="<?php echo $user_photo; ?>" />
+		<img src="<?php echo $user_photo; ?>" alt="<?php echo $display_name ?>" />
 	</div>
 	<div class="small-10 columns">
 		<h1 class="page-title author-title"><?php the_author(); ?></h1>

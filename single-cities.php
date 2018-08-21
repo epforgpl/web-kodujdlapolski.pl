@@ -166,7 +166,7 @@ else:
 											$mail = get_field('mail_contact', 'user_' . $member['ID']);
 											$function = get_field('function', 'user_' . $member['ID']);
 											?>
-											<a href="<?php echo get_author_posts_url($member['ID']); ?>"><img src="<?php echo $user_photo; ?>" /></a>
+											<a href="<?php echo get_author_posts_url($member['ID']); ?>"><img src="<?php echo $user_photo; ?>" alt="<?php echo $member['display_name'] ?>" /></a>
 										</td>
 										<td class="desc">
 											<h4><a href="<?php echo get_author_posts_url($member['ID']); ?>"><?php echo $member['display_name'] ?></a></h4>
@@ -210,7 +210,7 @@ else:
 																$user_photo = $src . '/images/blank-person.png';
 															}
 															?>
-															<a href="<?php echo get_author_posts_url($member['person']['ID']); ?>"><img src="<?php echo $user_photo; ?>" /></a>
+															<a href="<?php echo get_author_posts_url($member['person']['ID']); ?>"><img src="<?php echo $user_photo; ?>" alt="<?php echo $member['display_name'] ?>" /></a>
 														</td>
 														<td class="desc">
 															<h4><a href="<?php echo get_author_posts_url($member['person']['ID']); ?>"><?php echo $member['person']['display_name'] ?></a></h4>
@@ -248,10 +248,10 @@ else:
 								?>
 								<div class="partner-box">
 									<?php if ($url): ?>
-										<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" /></a>
+										<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php the_title(); ?>" /></a>
 										<h3><a href="<?php echo $url; ?>"><?php the_title(); ?></a></h3>
 									<?php else: ?>
-										<img src="<?php echo $logo['sizes']['medium']; ?>" />
+										<img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php the_title(); ?>" />
 										<h3><?php the_title(); ?></h3>
 									<?php endif; ?>
 									<div class="content">
@@ -317,9 +317,9 @@ else:
 									<div class="column">
 										<div class="partner-wrapper">
 											<?php if ($url): ?>
-												<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" /></a>
+												<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php the_title(); ?>" /></a>
 											<?php else: ?>
-												<img src="<?php echo $logo['sizes']['medium']; ?>" />
+												<img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php the_title(); ?>" />
 											<?php endif; ?>
 										</div>
 									</div>

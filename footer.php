@@ -20,9 +20,9 @@ global $success;
 				<div class="column">
 					<div class="partner-wrapper">
 						<?php if ($url): ?>
-							<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" /></a>
+							<a href="<?php echo $url; ?>"><img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php the_title(); ?>" /></a>
 						<?php else: ?>
-							<img src="<?php echo $logo['sizes']['medium']; ?>" />
+							<img src="<?php echo $logo['sizes']['medium']; ?>" alt="<?php the_title(); ?>" />
 						<?php endif; ?>
 					</div>
 				</div>
