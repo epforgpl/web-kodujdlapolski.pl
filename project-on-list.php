@@ -7,19 +7,6 @@ if (!$img) {
 
 $list = '';
 
-$tech = get_the_terms(get_the_ID(), 'technology');
-
-if (!empty($tech)) {
-	foreach ($tech as $term) {
-		$list[] = 'fl-'.$term->slug;
-	}
-}
-$status = get_the_terms(get_the_ID(), 'status');
-if (!empty($status)) {
-	foreach ($status as $term) {
-		$list[] = 'fl-'.$term->slug;
-	}
-}
 $filters = get_the_terms(get_the_ID(), 'filters');
 if (!empty($filters)) {
 	foreach ($filters as $term) {

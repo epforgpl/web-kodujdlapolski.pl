@@ -18,10 +18,6 @@ engine_register_partners_type('Partnerzy', 'partners', array('title', 'editor'),
 engine_register_project_type('Projekty', 'projects', array('title', 'editor', 'author'), true);
 engine_register_post_type('Spotkania', 'cities', array('title', 'editor'), true);
 
-
-//engine_register_taxonomy('Technologia', 'technology', array('projects'));
-//engine_register_taxonomy('Status projektu', 'status', array('projects'));
-
 engine_register_taxonomy('Filtry', 'filters', array('projects'));
 
 show_admin_bar(false);
@@ -292,7 +288,7 @@ add_action('login_head', function() {
 		#registerform > p:first-child, #registerform .acf-field{
 			display:none;
 		}
-		#registerform  .acf-field-image {
+		#registerform .acf-field-image {
 			display:block;
 		}
 	</style>

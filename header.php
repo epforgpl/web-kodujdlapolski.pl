@@ -21,7 +21,7 @@ $src = get_template_directory_uri();
 		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $src ?>/css/foundation.min.css" />
 		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $src ?>/style.css?v=1.08" />
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
-		<link rel="icon" href="<?php echo $src ?>/images/favicon.png" type="image/png"/>
+		<link rel="icon" href="<?php echo $src ?>/images/favicon.png" type="image/png" />
 		<?php
 		if (is_singular() && get_option('thread_comments'))
 			wp_enqueue_script('comment-reply');

@@ -210,7 +210,7 @@ else:
 																$user_photo = $src . '/images/blank-person.png';
 															}
 															?>
-															<a href="<?php echo get_author_posts_url($member['person']['ID']); ?>"><img src="<?php echo $user_photo; ?>" alt="<?php echo $member['display_name'] ?>" /></a>
+															<a href="<?php echo get_author_posts_url($member['person']['ID']); ?>"><img src="<?php echo $user_photo; ?>" alt="<?php echo $member['person']['display_name'] ?>" /></a>
 														</td>
 														<td class="desc">
 															<h4><a href="<?php echo get_author_posts_url($member['person']['ID']); ?>"><?php echo $member['person']['display_name'] ?></a></h4>

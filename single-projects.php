@@ -130,7 +130,7 @@ endif;
 														<div class="embed-wrapper">
 															<a href="<?php echo $link['url']; ?>/" class="btn red embed-link" target="_blank"><?php echo $link['name']; ?></a>
 															<div id="discourse-comments"></div>
-															<script type="text/javascript">
+															<script>
 																var discourseUrl = "https://forum.kodujdlapolski.pl/";
 																function showDiscourseTopic(topic) {
 																	var comments = document.getElementById('discourse-comments');
