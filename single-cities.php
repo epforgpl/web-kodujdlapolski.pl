@@ -239,7 +239,7 @@ else:
 						$posts = get_field('partners');
 						if ($posts):
 							?>
-							<h3 class="section-title"><?php _e('Partners'); ?></h3>
+							<h3 class="section-title mt30"><?php _e('Partners'); ?></h3>
 							<?php
 							foreach ($posts as $post):
 								setup_postdata($post);
