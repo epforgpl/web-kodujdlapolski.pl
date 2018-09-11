@@ -79,7 +79,7 @@ $four_in_row = 1;
 			<h3 class="section-title"><?php _e('Takes part in projects'); ?></h3>
 		</div>
 	</div>
-	<div class="row project-list pr-list">
+	<div class="row project-list">
 
 		<?php while ($query->have_posts()): $query->the_post(); ?>
 			<?php get_template_part('project-on-list'); ?>

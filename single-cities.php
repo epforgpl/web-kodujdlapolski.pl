@@ -131,7 +131,7 @@ else:
 
 					<?php if ($query->have_posts()): ?>
 						<h3 class="section-title mt30"><?php _e('Projects'); ?></h3>
-						<div class="row project-list pr-list">
+						<div class="row project-list">
 
 							<?php while ($query->have_posts()): $query->the_post(); ?>
 								<?php get_template_part('project-on-list'); ?>
