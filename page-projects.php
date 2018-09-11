@@ -40,6 +40,9 @@
 				</div>
 			</div>
 			<div class="small-12 medium-9 columns project-list">
+				
+				<p><input type="text" class="quicksearch" placeholder="<?php _e('Search'); ?>" /></p>
+				
 				<div class="row pr-list">
 					<?php
 					$post__not_in = array();

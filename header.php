@@ -16,12 +16,9 @@ $src = get_template_directory_uri();
 			if ($site_description && ( is_home() || is_front_page() ))
 				echo " | $site_description";
 			?></title>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $src ?>/css/normalize.css" />
-		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $src ?>/css/foundation.min.css" />
-		<link rel="stylesheet" type="text/css" media="all" href="<?php echo $src ?>/style.css?v=1.08" />
+
 		<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
-		<link rel="icon" href="<?php echo $src ?>/images/favicon.png" type="image/png"/>
+		<link rel="icon" href="<?php echo $src ?>/images/favicon.png" type="image/png" />
 		<?php
 		if (is_singular() && get_option('thread_comments'))
 			wp_enqueue_script('comment-reply');
@@ -92,13 +89,13 @@ $src = get_template_directory_uri();
 			</div>
 			<div class="row">
 				<div class="small-5 columns show-for-large">
-					<?php wp_nav_menu(array('theme_location' => 'primary', 'menu_class' => 'text-center main-menu')); ?>
+					<?php wp_nav_menu(array('theme_location' => 'primary', 'menu_class' => 'text-right main-menu')); ?>
 				</div>
 				<div class="small-6 large-2 columns large-text-center">
 					<a href="<?php echo home_url(); ?>"><img src="<?php echo $src; ?>/images/logo.png" alt="<?php bloginfo( 'name' ); ?>" /></a>
 				</div>
 				<div class="small-5 columns show-for-large relative">
-					<?php wp_nav_menu(array('theme_location' => 'primary2', 'menu_class' => 'text-center main-menu')); ?>
+					<?php wp_nav_menu(array('theme_location' => 'primary2', 'menu_class' => 'text-left main-menu')); ?>
 					<div class="lang">
 						<?php
 						$langs = icl_get_languages('skip_missing=0');

@@ -148,25 +148,21 @@ global $success;
 	</div>
 <?php endif; ?>
 
-<script src="<?php echo $src ?>/js/vendor/jquery.min.js"></script>
-<script src="<?php echo $src ?>/js/foundation.min.js"></script>
-<script src="<?php echo $src ?>/js/isotope.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"></script>
-<script>
-								$(document).foundation();
-								var src = '<?php echo $src; ?>';
-</script>
-<script src="<?php echo $src ?>/js/main.js?v=1.02"></script>
 
-<?php if ($success == 1): ?>
-	<script>
-									$('#successModal').foundation('open');
-	</script>
-<?php endif; ?>
 <?php
 wp_footer();
 ?>
 
+<script>
+		$(document).foundation();
+		var src = '<?php echo $src; ?>';
+</script>
+
+<?php if ($success == 1): ?>
+	<script>
+		$('#successModal').foundation('open');
+	</script>
+<?php endif; ?>
 
 
 </body>

@@ -18,10 +18,6 @@ engine_register_partners_type('Partnerzy', 'partners', array('title', 'editor'),
 engine_register_project_type('Projekty', 'projects', array('title', 'editor', 'author'), true);
 engine_register_post_type('Spotkania', 'cities', array('title', 'editor'), true);
 
-
-//engine_register_taxonomy('Technologia', 'technology', array('projects'));
-//engine_register_taxonomy('Status projektu', 'status', array('projects'));
-
 engine_register_taxonomy('Filtry', 'filters', array('projects'));
 
 show_admin_bar(false);
@@ -292,7 +288,7 @@ add_action('login_head', function() {
 		#registerform > p:first-child, #registerform .acf-field{
 			display:none;
 		}
-		#registerform  .acf-field-image {
+		#registerform .acf-field-image {
 			display:block;
 		}
 	</style>
@@ -306,3 +302,67 @@ function remove_xmlrpc_pingback_ping( $methods ) {
 };
 
 remove_action('wp_head', 'wp_generator');
+
+function default_filter_customizer_register( $wp_customize ) {
+	
+	$wp_customize->add_setting( 'default_filter', array() );
+	
+	
+	$wp_customize->add_section( 'default_filter_section', array(
+		'title'		=> __( 'Default filter' ),
+		'priority'	=> 30,
+	) );
+	
+	$json = array();
+
+	$terms = get_terms( array(
+		'taxonomy' => 'filters',
+		'hide_empty' => false
+	) );
+
+	foreach ( $terms as $term ) {
+		$json[ $term->slug ] = $term->name;
+	}
+	
+	
+	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'default_filter', array(
+				'label'			=> __( 'Choose default filter on projects page' ),
+				'section'		=> 'default_filter_section',
+				'settings'		=> 'default_filter',
+				'type'			=> 'select',
+				'choices'		=> $json
+			)
+		)
+	);
+
+}
+
+add_action( 'customize_register', 'default_filter_customizer_register' );
+
+
+function enqueue_scripts_and_styles() {
+
+	wp_enqueue_style( 'font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' );
+	wp_enqueue_style( 'normalize', get_template_directory_uri() . '/css/normalize.css' );
+	wp_enqueue_style( 'foundation', get_template_directory_uri() . '/css/foundation.min.css' );
+	wp_enqueue_style( 'style', get_template_directory_uri() . '/style.css' );
+
+	wp_enqueue_script( 'jquery2', get_template_directory_uri() . '/js/vendor/jquery.min.js', array(), null, true );
+	wp_enqueue_script( 'foundation', get_template_directory_uri() . '/js/foundation.min.js', array(), null, true );
+	wp_enqueue_script( 'isotope', get_template_directory_uri() . '/js/isotope.min.js', array(), null, true );
+	wp_enqueue_script( 'scrollTo', '//cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js', array(), null, true );
+	wp_enqueue_script( 'main', get_template_directory_uri() . '/js/main.js', array( 'jquery2' ), null, true );
+	
+	// Pass wordpress variables to javascript
+	$site_parameters = array(
+		'default_filter' => get_theme_mod( 'default_filter' ),
+		'plugins_url' => plugin_dir_url( __FILE__ ),
+		'site_url' => get_site_url(),
+		'theme_directory' => get_template_directory_uri()
+	);
+
+	wp_localize_script( 'main', 'site_parameters', $site_parameters );
+
+}
+
+add_action( 'wp_enqueue_scripts', 'enqueue_scripts_and_styles' );

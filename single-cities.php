@@ -210,7 +210,7 @@ else:
 																$user_photo = $src . '/images/blank-person.png';
 															}
 															?>
-															<a href="<?php echo get_author_posts_url($member['person']['ID']); ?>"><img src="<?php echo $user_photo; ?>" alt="<?php echo $member['display_name'] ?>" /></a>
+															<a href="<?php echo get_author_posts_url($member['person']['ID']); ?>"><img src="<?php echo $user_photo; ?>" alt="<?php echo $member['person']['display_name'] ?>" /></a>
 														</td>
 														<td class="desc">
 															<h4><a href="<?php echo get_author_posts_url($member['person']['ID']); ?>"><?php echo $member['person']['display_name'] ?></a></h4>
@@ -239,7 +239,7 @@ else:
 						$posts = get_field('partners');
 						if ($posts):
 							?>
-							<h3 class="section-title"><?php _e('Partners'); ?></h3>
+							<h3 class="section-title mt30"><?php _e('Partners'); ?></h3>
 							<?php
 							foreach ($posts as $post):
 								setup_postdata($post);

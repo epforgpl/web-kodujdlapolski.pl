@@ -1,15 +1,24 @@
-var filters = '';
-var $isot = $('.pr-list');
-$(function () {
+$(document).ready(function () {
 	
-	$isot.isotope({
+	var default_filter = site_parameters.default_filter;
+	
+	$('[data-filter="' + default_filter + '"]').addClass('current');
+	
+	var filters = '.fl-' + default_filter;
+	
+	// quick search regex
+	var qsRegex;
+	var buttonFilter;
+	
+	var $isot = $('.pr-list').isotope({
 		itemSelector: '.project-box',
-		layoutMode: 'fitRows'
+		layoutMode: 'fitRows',
+		filter: filters
 	});
 
 	$('.filter').on('click', function (e) {
 		e.preventDefault();
-		filters = '';
+		
 		$(this).toggleClass('current');
 
 		if ($(this).hasClass('filter2')) {
@@ -17,10 +26,10 @@ $(function () {
 			$(this).addClass('current');
 		}
 
-		$('.filter.current').each(function () {
-			filters = filters + '.fl-' + $(this).data('filter');
+		buttonFilter = $(this).data('filter');
+		$isot.isotope({
+			filter: filterWithSearch
 		});
-		$isot.isotope({filter: filters});
 		
 		if ($(window).width() < 642) {
 			$.scrollTo($('.project-list'),500);
@@ -29,12 +38,63 @@ $(function () {
 		return false;
 	});
 	
-	if ($('.page-template-page-projects').length > 0) {
-		$('.filter.current').each(function () {
-			filters = filters + '.fl-' + $(this).data('filter');
+	// use value of search field to filter
+	var $quicksearch = $('.quicksearch').keyup(debounce(function() {
+		
+		qsRegex = new RegExp($quicksearch.val(), 'gi');
+		$isot.isotope({
+			filter: filterWithSearch
 		});
-		$isot.isotope({filter: filters});
+		
+	}, 500 ) );
+	
+	function filterWithSearch() {
+		
+		var inclusives = [];
+		// inclusive filters from checkboxes
+		$('.filter.current').each(function() {
+			inclusives.push('fl-' + $(this).data('filter'));
+		});
+		
+		var searchResult = qsRegex ? $(this).text().match(qsRegex) : true;
+		var filterResult = inclusives.length == 0 ? true : false;
+		
+		if(inclusives.length > 0) {
+			
+			var filterToCheck = $(this).attr('class').split(/\s+/)
+			
+			$.each(inclusives, function(key, val) {
+				
+				tmpFilter = filterToCheck.includes(val);
+				
+				if(tmpFilter) {
+					filterResult = true;
+				} else {
+					filterResult = false;
+					return false;
+				}
+				
+			});
+			
+		}
+		return searchResult && filterResult;
 	}
+	
+	// debounce so filtering doesn't happen every millisecond
+	function debounce(fn, threshold) {
+		var timeout;
+		threshold = threshold || 100;
+		return function debounced() {
+			clearTimeout(timeout);
+			var args = arguments;
+			var _this = this;
+			function delayed() {
+				fn.apply(_this, args);
+			}
+			timeout = setTimeout(delayed, threshold);
+		};
+	}
+	
 
 	if ($(window).scrollTop() > 10) {
 		$('header').addClass('scrolled');
