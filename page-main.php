@@ -119,7 +119,7 @@
 			</div>
 		</div>
 
-		<div class="row small-up-2 large-up-6 pr-list project-list mt40">
+		<div class="row small-up-2 large-up-6 project-list mt40">
 			<?php
 			$projects = get_field('projects');
 			$i = 0;
