@@ -223,7 +223,7 @@ endif;
 																	<?php //print_r($o);   ?>
 																	<div class="issue-row">
 																		<div class="title-col">
-																			<a href="<?php echo $o->url; ?>" target="_blank"><?php echo $o->title; ?></a>
+																			<a href="<?php echo $o->html_url; ?>" target="_blank"><?php echo $o->title; ?></a>
 																			<div class="meta-data">#<?php echo $o->number; ?> <?php _e('opened on'); ?> <?php echo date_i18n('d M Y', strtotime($o->created_at)); ?> <?php _e('by'); ?> <?php echo $o->user->login; ?> <?php _e('updated on'); ?> <?php echo date_i18n('d M Y', strtotime($o->updated_at)); ?></div>
 																		</div>
 																		<div class="assignee-col">
