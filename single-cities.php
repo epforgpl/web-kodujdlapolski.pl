@@ -54,7 +54,7 @@ else:
 					<?php
 					$fb_cities = get_field('fb_cities');
 					if ($fb_cities) {
-						$cities = '';
+						$cities = [];
 						foreach ($fb_cities as $fb_city) {
 							$cities[] = $fb_city['city'];
 						}
@@ -184,7 +184,7 @@ else:
 
 					<?php
 					if ($query->have_posts()):
-						$exists = '';
+						$exists = [];
 						?>
 
 						<h3 class="section-title mt30 show-for-medium"><?php _e('Members'); ?></h3>

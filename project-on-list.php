@@ -5,7 +5,7 @@ if (!$img) {
 	$img = get_field('photo_main');
 }
 
-$list = '';
+$list = [];
 
 $filters = get_the_terms(get_the_ID(), 'filters');
 if (!empty($filters)) {

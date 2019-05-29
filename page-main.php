@@ -123,6 +123,7 @@
 			<?php
 			$projects = get_field('projects');
 			$i = 0;
+			$notin = [];
 			if ($projects):
 				foreach ($projects as $post):
 					setup_postdata($post);

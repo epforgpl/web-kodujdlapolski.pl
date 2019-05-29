@@ -2,7 +2,7 @@
 <?php
 	$fb_cities = get_field('fb_cities');
 	if ($fb_cities) {
-		$cities = '';
+		$cities = [];
 		foreach ($fb_cities as $fb_city) {
 			$cities[] = $fb_city['city']; 
 		}

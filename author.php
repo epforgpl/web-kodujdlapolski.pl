@@ -33,7 +33,7 @@
 </div>
 
 <?php
-$per = '';
+$per = [];
 for ($i = 0; $i < 20; $i++) {
 	$per[] = array(
 			'key' => 'osoby_' . $i . '_person',
