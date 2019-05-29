@@ -1,6 +1,6 @@
 {
   "wp-version": "4.7.5",
-  "theme-git": "https://github.com/epforgpl/web-kodujdlapolski.pl.git",
+  "theme-git": "https://github.com/epforgpl/web-kodujdlapolski.pl",
   "plugins": [  
   {  
     "name":"advanced-custom-fields-pro",
