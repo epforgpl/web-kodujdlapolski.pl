@@ -78,10 +78,10 @@ endif;
 							<?php the_content(); ?>
 							<?php
 							$topics = wp_get_post_terms(get_the_ID(), 'filters');
-							$ret = '';
+							$ret = [];
 							foreach ($topics as $topic):
 								if ($topic->parent != icl_object_id(84, 'filters', true)) {
-									$ret[$topic->parent] .= $topic->name . ', ';
+									$ret[$topic->parent] = ($ret[$topic->parent] ?? '') . $topic->name . ', ';
 								}
 							endforeach;
 							?>

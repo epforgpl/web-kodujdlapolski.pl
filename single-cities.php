@@ -114,6 +114,7 @@ else:
 
 					<?php
 					$members = get_field('coordinators');
+					if(!$members) { $members = []; } 
 					$args = array(
 							'post_type' => 'projects',
 							'posts_per_page' => -1,
@@ -146,7 +147,7 @@ else:
 					<div class="row mt10 show-for-medium">
 
 						<?php
-						$i = 1;
+						$i = 1; var_dump($members);
 						?>
 						<?php foreach ($members as $member): ?>
 							<div class="small-12 medium-4 columns team-list fleft">
