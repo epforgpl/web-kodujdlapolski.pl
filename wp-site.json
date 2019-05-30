@@ -1,10 +1,10 @@
 {
-  "wp-version": "4.7.5",
+  "wp-version": "4.7.13",
   "theme-git": "https://github.com/epforgpl/web-kodujdlapolski.pl",
   "plugins": [  
   {  
     "name":"advanced-custom-fields-pro",
-    "version":"5.5.2"
+    "version":"5.7.13"
   },
   {  
     "name":"all-in-one-wp-migration",
