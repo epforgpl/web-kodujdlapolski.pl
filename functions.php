@@ -355,7 +355,7 @@ function enqueue_scripts_and_styles() {
 	
 	// Pass wordpress variables to javascript
 	$site_parameters = array(
-		'default_filter' => get_theme_mod( 'default_filter' ),
+		'default_filter' => get_theme_mod( 'default_filter', 'rozwoj'),
 		'plugins_url' => plugin_dir_url( __FILE__ ),
 		'site_url' => get_site_url(),
 		'theme_directory' => get_template_directory_uri()
