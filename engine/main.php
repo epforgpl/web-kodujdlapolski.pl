@@ -2,23 +2,22 @@
 
 
 function engine_register_post_type( $name, $slug, $supports, $exclude_from_search = false, $cap = array()) {
-	if(!$labels) {
-		$labels = array(
-			'name' => ucfirst($name),
-			'singular_name' => ucfirst($name),
-			'add_new' => __('Dodaj nowe', 'engine'),
-			'add_new_item' => __('Dodaj nowe', 'engine'),
-			'edit_item' => __('Edytuj', 'engine'),
-			'new_item' => __('Nowe', 'engine'),
-			'view_item' => __('Zobacz', 'engine'),
-			'search_items' => __('Szukaj', 'engine'),
-			'not_found' =>  __('Brak','engine'),
-			'not_found_in_trash' => __('Brak','engine'), 
-			'parent_item_colon' => ''
-		  );
-	  }
+
+	$labels = array(
+		'name' => ucfirst($name),
+		'singular_name' => ucfirst($name),
+		'add_new' => __('Dodaj nowe', 'engine'),
+		'add_new_item' => __('Dodaj nowe', 'engine'),
+		'edit_item' => __('Edytuj', 'engine'),
+		'new_item' => __('Nowe', 'engine'),
+		'view_item' => __('Zobacz', 'engine'),
+		'search_items' => __('Szukaj', 'engine'),
+		'not_found' =>  __('Brak','engine'),
+		'not_found_in_trash' => __('Brak','engine'), 
+		'parent_item_colon' => ''
+	);
 	  
-	  $args = array(
+	$args = array(
 		'labels' => $labels,
 		'public' => true,
 		'exclude_from_search' => $exclude_from_search,
@@ -42,8 +41,8 @@ function engine_register_post_type( $name, $slug, $supports, $exclude_from_searc
 		'rewrite' => array('slug' => $slug),
 		'supports' => $supports,
 		'taxonomies' => array('groups', 'post_tag') 
-	  ); 
-	  register_post_type( strtolower($slug), $args );
+	); 
+	register_post_type( strtolower($slug), $args );
 }
 
 
@@ -70,23 +69,23 @@ function engine_register_taxonomy($name, $slug, $posttype, $hierarchical = true)
 
 
 function engine_register_project_type( $name, $slug, $supports, $exclude_from_search = false) {
-	if(!$labels) {
-		$labels = array(
-			'name' => ucfirst($name),
-			'singular_name' => ucfirst($name),
-			'add_new' => __('Dodaj nowe', 'engine'),
-			'add_new_item' => __('Dodaj nowe', 'engine'),
-			'edit_item' => __('Edytuj', 'engine'),
-			'new_item' => __('Nowe', 'engine'),
-			'view_item' => __('Zobacz', 'engine'),
-			'search_items' => __('Szukaj', 'engine'),
-			'not_found' =>  __('Brak','engine'),
-			'not_found_in_trash' => __('Brak','engine'), 
-			'parent_item_colon' => ''
-		  );
-	  }
-	  
-	  $args = array(
+
+	$labels = array(
+		'name' => ucfirst($name),
+		'singular_name' => ucfirst($name),
+		'add_new' => __('Dodaj nowe', 'engine'),
+		'add_new_item' => __('Dodaj nowe', 'engine'),
+		'edit_item' => __('Edytuj', 'engine'),
+		'new_item' => __('Nowe', 'engine'),
+		'view_item' => __('Zobacz', 'engine'),
+		'search_items' => __('Szukaj', 'engine'),
+		'not_found' =>  __('Brak','engine'),
+		'not_found_in_trash' => __('Brak','engine'), 
+		'parent_item_colon' => ''
+	);
+
+	
+	$args = array(
 		'labels' => $labels,
 		'public' => true,
 		'exclude_from_search' => $exclude_from_search,
@@ -110,28 +109,27 @@ function engine_register_project_type( $name, $slug, $supports, $exclude_from_se
 		'rewrite' => array('slug' => $slug),
 		'supports' => $supports,
 		'taxonomies' => array('groups', 'post_tag') 
-	  ); 
-	  register_post_type( strtolower($slug), $args );
+	); 
+	register_post_type( strtolower($slug), $args );
 }
 
 function engine_register_partners_type( $name, $slug, $supports, $exclude_from_search = false) {
-	if(!$labels) {
-		$labels = array(
-			'name' => ucfirst($name),
-			'singular_name' => ucfirst($name),
-			'add_new' => __('Dodaj nowe', 'engine'),
-			'add_new_item' => __('Dodaj nowe', 'engine'),
-			'edit_item' => __('Edytuj', 'engine'),
-			'new_item' => __('Nowe', 'engine'),
-			'view_item' => __('Zobacz', 'engine'),
-			'search_items' => __('Szukaj', 'engine'),
-			'not_found' =>  __('Brak','engine'),
-			'not_found_in_trash' => __('Brak','engine'), 
-			'parent_item_colon' => ''
-		  );
-	  }
+
+	$labels = array(
+		'name' => ucfirst($name),
+		'singular_name' => ucfirst($name),
+		'add_new' => __('Dodaj nowe', 'engine'),
+		'add_new_item' => __('Dodaj nowe', 'engine'),
+		'edit_item' => __('Edytuj', 'engine'),
+		'new_item' => __('Nowe', 'engine'),
+		'view_item' => __('Zobacz', 'engine'),
+		'search_items' => __('Szukaj', 'engine'),
+		'not_found' =>  __('Brak','engine'),
+		'not_found_in_trash' => __('Brak','engine'), 
+		'parent_item_colon' => ''
+	);
 	  
-	  $args = array(
+	$args = array(
 		'labels' => $labels,
 		'public' => true,
 		'exclude_from_search' => $exclude_from_search,
@@ -155,6 +153,6 @@ function engine_register_partners_type( $name, $slug, $supports, $exclude_from_s
 		'rewrite' => array('slug' => $slug),
 		'supports' => $supports,
 		'taxonomies' => array('groups', 'post_tag') 
-	  ); 
-	  register_post_type( strtolower($slug), $args );
+	); 
+	register_post_type( strtolower($slug), $args );
 }
