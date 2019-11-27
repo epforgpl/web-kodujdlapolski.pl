@@ -1,5 +1,5 @@
 <?php
-if ($_GET['csv'] == 'show'):
+if ( isset( $_GET['csv'] ) && $_GET['csv'] == 'show'):
 	header("Content-type: text/csv; charset=utf-8");
 	header("Content-Disposition: attachment; filename=output.csv");
 	header("Pragma: no-cache");
