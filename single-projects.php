@@ -241,7 +241,7 @@ endif;
 																			<?php endif; ?>
 																		</div>
 																		<div class="comments-col">
-																			<i class="fa fa-comment-o"></i> <?php echo $o->comments; ?>
+																			<i class="icon-comment-o"></i> <?php echo $o->comments; ?>
 																		</div>
 																	</div>
 
@@ -254,7 +254,7 @@ endif;
 																	$b++;
 																endforeach;
 																?>
-																<a href="<?php echo $link['url']; ?>/issues/" class="sm-link" target="_blank"><?php _e('See more'); ?> <i class="fa fa-angle-right"></i></a>
+																<a href="<?php echo $link['url']; ?>/issues/" class="sm-link" target="_blank"><?php _e('See more'); ?> <i class="icon-angle-right"></i></a>
 															</div>
 
 
@@ -308,7 +308,7 @@ endif;
 																		$b++;
 																	endforeach;
 																	?>
-																	<a href="<?php echo $link['url']; ?>/commits/" class="sm-link" target="_blank"><?php _e('See more'); ?> <i class="fa fa-angle-right"></i></a>	
+																	<a href="<?php echo $link['url']; ?>/commits/" class="sm-link" target="_blank"><?php _e('See more'); ?> <i class="icon-angle-right"></i></a>
 																</div>
 															<?php endif; ?>
 														<?php endif; ?>

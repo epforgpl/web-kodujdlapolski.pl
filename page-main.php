@@ -39,7 +39,7 @@
 						$evs = array_reverse($events['data']);
 						foreach ($evs as $ev):
 							if (strtotime($ev['start_time']) + 3600 > time()) {
-								$meetings .= '<div class="overflow mb15"><div class="cal-icon"><img src="' . $src . '/images/calendar-icon.png" /></div><a href="https://www.facebook.com/events/' . $ev['id'] . '" class="event-link">';
+								$meetings .= '<div class="overflow mb15"><div class="cal-icon"><i class="icon-calendar"></i></div><a href="https://www.facebook.com/events/' . $ev['id'] . '" class="event-link">';
 								$meetings .= '<span class="date">' . date_i18n('d F', strtotime($ev['start_time']) + 3600) . '</span>'
 												. '<span class="city">' . get_city_name($ev['place']['location']['city']) . '</span></a></div>';
 								$i++;
@@ -91,7 +91,7 @@
 					$evs = array_reverse($events['data']);
 					foreach ($evs as $ev):
 						if (strtotime($ev['start_time']) + 3600 > time()) {
-							$meetings .= '<div class="overflow mb15"><div class="cal-icon"><img src="' . $src . '/images/calendar-icon.png" /></div><a href="https://www.facebook.com/events/' . $ev['id'] . '" class="event-link">';
+							$meetings .= '<div class="overflow mb15"><div class="cal-icon"><i class="icon-calendar"></i></div><a href="https://www.facebook.com/events/' . $ev['id'] . '" class="event-link">';
 							$meetings .= '<span class="date">' . date_i18n('d F', strtotime($ev['start_time']) + 3600) . '</span>'
 											. '<span class="city">' . get_city_name($ev['place']['location']['city']) . '</span></a></div>';
 							$i++;

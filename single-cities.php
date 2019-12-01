@@ -84,7 +84,7 @@ else:
 						$i = 0;
 						foreach ($events['data'] as $ev):
 							if (in_array($ev['place']['location']['city'], $cities) && strtotime($ev['start_time']) + 3600 > time()) {
-								$meetings .= '<div class="overflow mb15"><div class="cal-icon"><img src="' . $src . '/images/calendar-icon.png" /></div><a href="https://www.facebook.com/events/' . $ev['id'] . '">';
+								$meetings .= '<div class="overflow mb15"><div class="cal-icon"><i class="icon-calendar"></i></div><a href="https://www.facebook.com/events/' . $ev['id'] . '">';
 								$meetings .= '<span class="date">' . date_i18n('d F', strtotime($ev['start_time']) + 3600) . '</span>'
 												. '<span class="name">' . $ev['name'] . '</span></a></div>';
 								$i++;

@@ -342,7 +342,7 @@ add_action( 'customize_register', 'default_filter_customizer_register' );
 
 function enqueue_scripts_and_styles() {
 
-	wp_enqueue_style( 'font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' );
+	wp_enqueue_style( 'icomoon', get_template_directory_uri() . '/css/icomoon.css' );
 	wp_enqueue_style( 'normalize', get_template_directory_uri() . '/css/normalize.css' );
 	wp_enqueue_style( 'foundation', get_template_directory_uri() . '/css/foundation.min.css' );
 	wp_enqueue_style( 'style', get_template_directory_uri() . '/style.css' );
