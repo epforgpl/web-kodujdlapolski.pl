@@ -4,6 +4,7 @@ if (isset($_POST['g-recaptcha-response'])):
 	require_once('recaptcha/autoload.php');
 	$recaptcha = new \ReCaptcha\ReCaptcha('6LdZuB8TAAAAADNqj-Iv6YuAdRqJBEzMhJz_ZUmB');
 	$resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+	$attachments = [];
 
 	if (($resp->isSuccess())) {
 		if (!empty($_POST['email']) && empty($_GET['firstname']) && empty($_GET['lastname'])) {
@@ -22,29 +23,28 @@ if (isset($_POST['g-recaptcha-response'])):
 			$headers = 'Content-type: text/html; charset=utf-8' . "\r\n";
 			$headers .= 'From: mailer@kodujdlapolski.pl' . "\r\n" .
 							'Reply-To: ' . $_POST['email'] . "\r\n";
-			if ($_POST['cc'] == '1') {
-				$title = 'Kontakt z koordynatorem';
-				$content = 'Imię: ' . $_POST['fname'] . ' ' . $_POST['lname'] .
-								'<br>email: ' . $_POST['email'] .
-								'<br>projekt: ' . get_the_title($pid) .
-								'<br>wiadomość: ' . nl2br($_POST['message']);
+			if (isset($_POST['cc']) && $_POST['cc'] == '1') {
+				$title = __('Contact with the coordinator');
+				$content = __('First name') . ' i ' . __('Last name') . ': ' . $_POST['fname'] . ' ' . $_POST['lname'] .
+								'<br>Email: ' . $_POST['email'] .
+								'<br>' . __('Project') . ': ' . get_the_title($pid) .
+								'<br>' . __('Message') . ': ' . nl2br($_POST['message']);
 			} else {
-				$title = 'Zapytanie ze strony';
-				$content = 'Imię: ' . $_POST['fname'] . ' ' . $_POST['lname'] .
-								'<br>email: ' . $_POST['email'] .
-								'<br>praca: ' . $_POST['job'] .
-								'<br>projekt: ' . get_the_title($pid) .
-								'<br>wiadomość: ' . nl2br($_POST['message']);
+				$title = __('Application from the site');
+				$content = __('First name') . ' i ' . __('Last name') . ': ' . $_POST['fname'] . ' ' . $_POST['lname'] .
+								'<br>Email: ' . $_POST['email'] .
+								'<br>' . __('Job') . ': ' . $_POST['job'] .
+								'<br>' . __('Project') . ': ' . get_the_title($pid) .
+								'<br>' . __('Message') . ': ' . nl2br($_POST['message']);
 			}
 			wp_mail($_POST['email'], $title, $content, $headers, $attachments);
 			
 			$headers .= 'Cc: kontakt@kodujdlapolski.pl';
 			wp_mail(get_field('mail', $pid), $title, $content, $headers, $attachments);
 			
-			
-			
-			//wp_mail('piotr@kliks.eu', $title, $content, $headers, $attachments);
-			unlink($attachments[0]);
+			if(!empty($attachments)) {
+				unlink($attachments[0]);
+			}
 
 			$success = 1;
 		}
@@ -80,7 +80,7 @@ endif;
 							$topics = wp_get_post_terms(get_the_ID(), 'filters');
 							$ret = [];
 							foreach ($topics as $topic):
-								if ($topic->parent != icl_object_id(84, 'filters', true)) {
+								if ($topic->parent != icl_object_id(84, 'filters', true) && $topic->parent != icl_object_id(0, 'filters', true)) {
 									$ret[$topic->parent] = ($ret[$topic->parent] ?? '') . $topic->name . ', ';
 								}
 							endforeach;
