@@ -8,27 +8,27 @@
   },
   {
     "name": "all-in-one-wp-migration",
-    "version": "6.97"
+    "version": "7.14"
   },
   {
     "name": "captcha-bank",
-    "version": "4.0.32"
+    "version": "4.0.35"
   },
   {
     "name": "taxonomy-terms-order",
-    "version": "1.5.7"
+    "version": "1.5.7.1"
   },
   {
     "name": "duplicate-post",
-    "version": "3.2.2"
+    "version": "3.2.4"
   },
   {
     "name": "members",
-    "version": "2.1.0"
+    "version": "2.2.0"
   },
   {
     "name": "require-featured-image",
-    "version": "1.4.1"
+    "version": "1.5.0"
   },
   {
     "name": "welcome-email-editor",
@@ -52,11 +52,11 @@
   },
   {
     "name": "wp-piwik",
-    "version": "1.0.21"
+    "version": "1.0.22"
   },
   {
     "name": "wp-mail-smtp",
-    "version": "1.4.2"
+    "version": "1.8.1"
   },
   {
     "name": "wp-migrate-db",
@@ -72,11 +72,11 @@
   },
   {
     "name": "wps-hide-login",
-    "version": "1.5.2.2"
+    "version": "1.5.4.2"
   },
   {
     "name": "wordpress-seo",
-    "version": "11.5"
+    "version": "12.8"
   }
 ]
 }
