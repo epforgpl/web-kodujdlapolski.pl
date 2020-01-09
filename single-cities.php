@@ -147,7 +147,7 @@ else:
 					<div class="row mt10 show-for-medium">
 
 						<?php
-						$i = 1; var_dump($members);
+						$i = 1;
 						?>
 						<?php foreach ($members as $member): ?>
 							<div class="small-12 medium-4 columns team-list fleft">
