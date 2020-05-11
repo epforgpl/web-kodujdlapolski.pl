@@ -75,14 +75,14 @@ $src = get_template_directory_uri();
 			<div class="ep-top">
 				<div class="row">
 					<div class="small-12 medium-6 large-6 columns text-center medium-text-left">
-            <a target="_blank" href="http://epf.org.pl/"><?php _e('ePaństwo Foundation program') ?><img src="<?php echo $src; ?>/images/eplogo.png" alt="<?php _e('ePaństwo Foundation program') ?>" /></a>
+						<a href="https://epf.org.pl/" rel="noopener" target="_blank"><?php _e('ePaństwo Foundation program') ?><img src="<?php echo $src; ?>/images/eplogo.png" alt="<?php _e('ePaństwo Foundation program') ?>" /></a>
 					</div>
 					<div class="small-12 medium-6 large-6 columns text-center medium-text-right social-links">
-						<a href="<?php the_field('irc_url', 'options'); ?>" target="_blank"><i class="icon-irc"></i></a>
-						<a href="<?php the_field('slack_url', 'options'); ?>" target="_blank"><i class="icon-slack"></i></a>
-					        <a href="<?php the_field('youtube_url', 'options'); ?>" target="_blank"><i class="icon-youtube-square"></i></a>
-						<a href="<?php the_field('twitter_url', 'options'); ?>" target="_blank"><i class="icon-twitter-square"></i></a>
-						<a href="<?php the_field('facebook_url', 'options'); ?>" target="_blank"><i class="icon-facebook-square"></i></a>
+						<a href="<?php the_field('irc_url', 'options'); ?>" rel="noopener" target="_blank"><i class="icon-irc"></i></a>
+						<a href="<?php the_field('slack_url', 'options'); ?>" rel="noopener" target="_blank"><i class="icon-slack"></i></a>
+						<a href="<?php the_field('youtube_url', 'options'); ?>" rel="noopener" target="_blank"><i class="icon-youtube-square"></i></a>
+						<a href="<?php the_field('twitter_url', 'options'); ?>" rel="noopener" target="_blank"><i class="icon-twitter-square"></i></a>
+						<a href="<?php the_field('facebook_url', 'options'); ?>" rel="noopener" target="_blank"><i class="icon-facebook-square"></i></a>
 					</div>
 					<div class="small-12 columns show-for-large"><hr /></div>
 				</div>

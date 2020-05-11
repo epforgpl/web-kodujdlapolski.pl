@@ -225,7 +225,7 @@
 				</a>
 			</div>
 			<div class="small-12 medium-6 large-3 columns overflow pt15">
-				<a href="https://forum.kodujdlapolski.pl/c/pomysly" class="dblock" target="_blank">
+				<a href="https://forum.kodujdlapolski.pl/c/pomysly" class="dblock" rel="noopener" target="_blank">
 					<?php
 					if (false === ($ideas = get_transient('ideas'))) {
 						$ideas = 0;
