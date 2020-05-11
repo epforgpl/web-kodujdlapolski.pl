@@ -788,66 +788,6 @@ img.aligncenter { display: block; margin-left: auto; margin-right: auto; }
 	}
 }
 
-.meetings {
-	position:absolute;
-	top:25px;
-	bottom:25px;
-	right:25px;
-	border:2px solid #fff;
-	background:rgba(170,0,1,0.8);
-	width:320px;
-	padding:30px 30px;
-	
-	@media all and (max-width:1023px) {
-		position:relative;
-		top:0;
-		bottom:0;
-		right:0;
-		border:0;
-		width:auto;
-	}
-
-	.title {
-		font-weight:700;
-		font-size:20px;
-		color:#fff;
-	}
-
-	.cal-icon {
-		color: #fff;
-		float:left;
-		font-size: 28px;
-		width:10%;
-	}
-	.event-link {
-		display:block;
-		width:90%;
-		float:left;
-		padding-left:15px;
-		line-height:25px;
-		span {
-			display:block;
-		}
-	}
-
-	.date {
-		font-size:18px;
-		font-weight:700;
-		color:#fff;
-	}
-	.city {
-		font-size:30px;
-		font-weight:700;
-		color:#fff;
-	}
-
-	.msg {
-		font-size:18px;
-		color:#fff;
-		line-height:135%;
-	}
-}
-
 .stats-list {
 	.icon {
 		float:left;
@@ -980,52 +920,6 @@ img.aligncenter { display: block; margin-left: auto; margin-right: auto; }
 .facebook-box {
 	background:url(images/facebook-bg.png) no-repeat center center;
 	background-size:cover;
-}
-
-.meetings-city {
-	background:url(images/meetings-city-bg.png) no-repeat center center $red;
-	background-size:cover;
-	padding:30px 30px;
-	margin-bottom:20px;
-
-	.title {
-		font-weight:700;
-		font-size:20px;
-		color:#fff;
-	}
-
-	.cal-icon {
-		color: #fff;
-		float:left;
-		font-size: 28px;
-		width:10%;
-	}
-	a {
-		display:block;
-		width:90%;
-		float:left;
-		padding-left:15px;
-		line-height:25px;
-		span {
-			display:block;
-		}
-	}
-
-	.date {
-		font-size:18px;
-		font-weight:700;
-		color:#fff;
-	}
-	.name {
-		font-size:16px;
-		font-weight:700;
-		color:#fff;
-	}
-	.msg {
-		font-size:18px;
-		color:#fff;
-		line-height:135%;
-	}
 }
 
 .blog-city-list {

@@ -1,6 +1,5 @@
 <?php
 require_once('engine/main.php');
-require_once('Facebook/autoload.php');
 require_once('recaptcha/autoload.php');
 
 add_theme_support('post-thumbnails');
